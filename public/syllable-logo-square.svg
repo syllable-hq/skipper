@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="98px" height="80px" viewBox="0 0 98 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Syllable_031919" transform="translate(-256.000000, -356.000000)" fill="#313E50">
+            <g id="Group" transform="translate(305.287900, 396.000000) rotate(90.000000) translate(-305.287900, -396.000000) translate(265.787900, 347.000000)">
+                <g id="Group-34" transform="translate(10.212100, 0.000000)">
+                    <path d="M0.1931,10.7188 C0.1931,5.2965 4.5886,0.9004 10.0116,0.9004 C15.4339,0.9004 19.83,5.2965 19.83,10.7188 C19.83,16.1418 15.4339,20.5373 10.0116,20.5373 C4.5886,20.5373 0.1931,16.1418 0.1931,10.7188 Z" id="Fill-31"></path>
+                    <path d="M48.1122,97.4959 C42.6892,97.4959 38.2937,93.0998 38.2937,87.6774 C38.2937,82.2551 42.6892,77.859 48.1122,77.859 C53.5346,77.859 57.9307,82.2551 57.9307,87.6774 C57.9307,93.0998 53.5346,97.4959 48.1122,97.4959" id="Fill-33"></path>
+                </g>
+                <polygon id="Fill-27" points="0 44.1348 0 29.7364 78.5477 29.7364 78.5477 44.1348"></polygon>
+                <polygon id="Fill-29" points="0 68.3794 0 53.9811 78.5477 53.9811 78.5477 68.3794"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

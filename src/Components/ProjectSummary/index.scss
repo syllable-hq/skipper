@@ -1,0 +1,44 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.project-summary {
+  text-align: center;
+  padding: 0 $margin-md;
+
+  &[data-is-current-project='false'] {
+    // todo
+    // instead of hiding it, make it height 0 so the transition works.
+    display: none;
+    // for now just use display none and don't worry about the transition
+    opacity: 0;
+    height: 0;
+  }
+
+  &[data-is-current-project='true'] {
+    height: auto;
+    opacity: 1;
+    display: block;
+    transition: $transition-time;
+    transition-property: opacity;
+  }
+
+  .project-summary__name,
+  .project-summary__skills {
+    @include small-text();
+    color: $color-gray;
+  }
+
+  .project-summary__text {
+    font-size: $font-size-lg;
+    margin: $margin-md  0;
+
+    @media screen and (max-width: $screen-size-mobile) {
+      font-size: $font-size-md;
+    }
+  }
+
+  .pipe {
+    padding: .35rem;
+    // font-weight: normal;
+  }
+}

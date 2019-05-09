@@ -1,0 +1,110 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.nav-main {
+  align-items: center;
+  background: $color-secondary;
+  border-bottom: $nav-border-size solid $color-primary;
+  display: flex;
+  height: $nav-main-height;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+
+  @media screen and (max-width: $screen-size-mobile) {
+    border-bottom-width: 0;
+    height: $nav-main-height-mobile;
+    position: fixed;
+  }
+
+  a {
+    color: $color-primary;
+  }
+
+  .nav-logo {
+    left: 1rem;
+    position: absolute;
+
+    @media screen and (max-width: $screen-size-mobile) {
+      left: $margin-xs;
+
+      img.syllable-logo {
+        width: 6rem;
+      }
+    }
+  }
+
+  .nav-items {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    @media screen and (max-width: $screen-size-mobile) {
+      margin-right: $margin-xs;
+    }
+
+    li {
+      font-size: $font-size-md;
+      margin: 0 1.5vw;
+      text-align: center;
+
+      @media screen and (max-width: $screen-size-mobile) {
+        font-size: $font-size-sm;
+        margin: 0 2vw;
+        min-width: 0;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  // dot indicator when page is active
+  .syll {
+    &.indicator {
+      @include pseudo-el-dot();
+
+      transform: scale(1);
+      width: .5em;
+    }
+  }
+
+  // dot animation on large viewports
+  @media screen and (min-width: $screen-size-mobile) {
+  // giving these specific widths so hover animation doesn't move other nav items
+  .studio { width: 8rem; }
+  .projects { width: 9rem; }
+  .blog { width: 5rem; }
+
+  .syll {
+    @include pseudo-el-dot();
+  }
+
+  .item-secondary a {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .item-secondary a:hover .syll {
+    &:after {
+
+    }
+
+    transform: scale(1);
+    width: .5em;
+  }
+}
+
+  .syllable-logo {
+    &:before {
+      width: auto;
+    }
+  }
+
+  img.syllable-logo  {
+    width: 6em;
+    vertical-align: middle;
+  }
+}

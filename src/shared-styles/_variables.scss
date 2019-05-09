@@ -1,0 +1,90 @@
+// testing
+// https://coolors.co/161616-313e50-5d5e60-cfaba6-4a86e8
+
+// brand blue
+$color-primary: #313E50;
+// $color-primary: #3F525C;
+
+// for comparison
+// 2018-12
+// $color-primary: #495C72;
+// $color-tumblr: #36465d;
+$color-white: #ffffff;
+// $color-link: #002958;
+// $color-link: #003470;
+// $color-link: #004799;
+// $color-link: #245288;
+// 2018-12
+// $color-link: #00679d;
+// blueberry
+$color-link: #4A86E8;
+
+$color-secondary: $color-white;
+// ebony grey from coolers
+$color-gray: #5D5E60;
+
+$color-sky-bottom: #ced1e0;
+$color-sky-top: #b1b1c0;
+
+@font-face {
+  font-family: 'Matter-Regular';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF; /* Download only latin glyphs */
+  src: url('/fonts/Matter-Regular.woff2') format('woff2'),
+       url('/fonts/Matter-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Matter-SemiBold';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF; /* Download only latin glyphs */
+  src: url('/fonts/Matter-SemiBold.woff2') format('woff2'),
+       url('/fonts/Matter-SemiBold.woff') format('woff');
+}
+
+$font-family: 'Matter-SemiBold', serif; //sans-serif;
+
+$font-family-reg: 'Matter-Regular', serif; //sans-serif;
+
+$letter-spacing: -.035em;
+$letter-spacing-small-text: .04em;
+$font-size-base: 16px;
+$font-size-sm-x: .75rem;
+$font-size-sm: 1.25rem;
+$font-size-md: 1.5rem;
+$font-size-lg: 2rem;
+$line-height: 1.2;
+$font-weight-bold: 600;
+
+$margin-xs: .75rem;
+$margin-sm: 1rem;
+$margin-md: 1.5rem;
+$margin-lg: 3rem;
+$padding-for-section: $margin-lg;
+
+$border-radius-slight: .25rem;
+
+$screen-size-tablet: 56rem;
+$screen-size-mobile: 50rem;
+$screen-size-tiny: 25rem;
+
+// test for shorter screens
+// $page-width: 60rem; //960px
+$page-width: 100%;
+
+$nav-side-width: 2.5rem;
+$nav-border-size: 2px;
+$slogan-border-size: .25rem;
+$nav-main-height: 4rem;
+$nav-main-height-mobile: calc(#{$nav-main-height} * .75);
+$opacity-off-hover: .8;
+$tagline-offset: 8vh;
+$transition-time: .25s;
+
+// $animation-transition: ease-in-out .4s all;
+$animation-transition: .25s cubic-bezier(0,.92,.62,1) all;
+$icon-hover-scale: 1.1;

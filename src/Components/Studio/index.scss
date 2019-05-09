@@ -1,0 +1,33 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.page-about {
+  .page-panel {
+    position: relative;
+    font-size: $font-size-md;
+  }
+
+  .flex-container {
+    min-height: 100%;
+    @media screen and (max-width: $screen-size-mobile) {
+      flex-direction: column;
+    }
+  }
+
+  .background-map {
+    height: 100%;
+    width: 100%;
+    background: url(/background-map.png) no-repeat center center;
+    background-size: cover;
+  }
+
+  @media screen and (max-width: $screen-size-mobile) {
+    .about-map {
+      height: 50vh;
+    }
+  }
+
+  address {
+    color: $color-gray;
+  }
+}

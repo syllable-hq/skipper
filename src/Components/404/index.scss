@@ -1,0 +1,22 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.page-404 {
+  .wrap {
+    @include center-both();
+
+    font-family: $font-family-reg;
+    text-align: center;
+    color: $color-white;
+    font-size: $font-size-md;
+  }
+
+  .h1 {
+    font-size: $font-size-lg * 2;
+    margin-bottom: $margin-md;
+    font-family: $font-family;
+  }
+
+  .h2 {
+  }
+}

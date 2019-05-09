@@ -1,0 +1,142 @@
+@import './shared-styles/variables.scss';
+@import './shared-styles/mixins.scss';
+@import './shared-styles/reset.scss';
+@import './shared-styles/fontello/css/fontello.css';
+@import './shared-styles/fontello/css/animation.css';
+//
+// @import url('https://fonts.googleapis.com/css?family=Karla:400,700');
+
+html,
+body {
+  font-size: $font-size-base;
+  background: $color-sky-top;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  .page {
+    // when these were added to just the body, they weren't winning out for some reason
+    // Note: this was due to this bug: https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/200
+    // Fix for now is to make the reset.css a reset.scss.
+    font-family: $font-family;
+    letter-spacing: $letter-spacing;
+    line-height: $line-height;
+    font-size: $font-size-sm;
+    background: $color-primary;
+  }
+}
+
+.page {
+  position: relative;
+  width: $page-width;
+  background: $color-white;
+  color: $color-primary;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: $color-link;
+}
+
+p {
+  margin-bottom: $margin-md;
+}
+
+button {
+  border: none;
+}
+
+
+.page-inner {
+  box-sizing: border-box;
+  height: 100vh;
+  // offset for the nav-sides
+  padding: $nav-main-height $nav-side-width 0;
+  font-family: $font-family-reg;
+
+  @media screen and (max-width: $screen-size-mobile) {
+    height: auto;
+    min-height: 100vh;
+    padding-top: $nav-main-height-mobile;
+  }
+}
+
+.two-col-panel {
+  background-color: $color-secondary;
+  box-sizing: border-box;
+  min-height: calc(100vh - #{$nav-main-height});
+  overflow: hidden;
+  position: relative;
+
+  &.scroll {
+    overflow-y: auto;
+  }
+
+  @media screen and (max-width: $screen-size-mobile) {
+    height: 50%;
+    min-height: calc(50vh - #{$nav-main-height-mobile});
+    overflow-y: visible;
+  }
+}
+
+.page-panel {
+  @include full-size();
+  background: $color-secondary;
+
+  .h2 {
+    font-weight: $font-weight-bold;
+    margin-bottom: $margin-sm;
+  }
+
+  section {
+    margin: $padding-for-section;
+  }
+}
+
+.flex-wrap {
+  @include flex-wrap();
+}
+
+.flex-container {
+  display: flex;
+  background: inherit;
+
+  @media screen and (max-width: $screen-size-mobile) {
+    display: block;
+
+    .flex-cols-2 {
+      width: 100%;
+
+      &.col-right {
+        border-left: none;
+      }
+    }
+
+  }
+}
+
+.flex-cols-2 {
+  flex-grow: 1;
+  width: 50%;
+
+  &.col-right {
+    border-left: $nav-border-size solid $color-primary;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.react-static-loading {
+  // git rid of the spinning loader. It's distracting.
+  display: none !important;
+
+  svg {
+    @include center-both();
+  }
+}
