@@ -2,109 +2,130 @@
 @import '../../shared-styles/mixins.scss';
 
 .nav-main {
-  align-items: center;
-  background: $color-secondary;
-  border-bottom: $nav-border-size solid $color-primary;
-  display: flex;
-  height: $nav-main-height;
-  left: 0;
-  position: absolute;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
   width: 100%;
   z-index: 3;
 
-  @media screen and (max-width: $screen-size-mobile) {
-    border-bottom-width: 0;
-    height: $nav-main-height-mobile;
-    position: fixed;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
   }
 
-  a {
-    color: $color-primary;
+  li a {
+    display: block;
+    padding: 20px 20px;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+    color: black;
   }
 
-  .nav-logo {
-    left: 1rem;
+  li a:hover,
+  .menu-btn:hover {
+    background-color: #f4f4f4;
+  }
+
+  .logo {
+    display: block;
+    float: left;
+    font-size: 2em;
+    padding: 10px 20px;
+    text-decoration: none;
+    width: $nav-main-height;
+  }
+
+  /* menu */
+
+  .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+    float: right;
+  }
+
+  /* menu icon */
+
+  .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 50px 20px;
+    position: relative;
+    user-select: none;
+  }
+
+  .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+  }
+
+  .menu-icon .navicon:before,
+  .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
     position: absolute;
-
-    @media screen and (max-width: $screen-size-mobile) {
-      left: $margin-xs;
-
-      img.syllable-logo {
-        width: 6rem;
-      }
-    }
-  }
-
-  .nav-items {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    transition: all .2s ease-out;
     width: 100%;
-    @media screen and (max-width: $screen-size-mobile) {
-      margin-right: $margin-xs;
-    }
+  }
 
+  .menu-icon .navicon:before {
+    top: 5px;
+  }
+
+  .menu-icon .navicon:after {
+    top: -5px;
+  }
+
+  /* menu btn */
+  .menu-btn {
+    display: none;
+  }
+
+  .menu-btn:checked ~ .menu {
+    max-height: 240px;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+  }
+
+  @media  screen and (min-width: 48em) {
     li {
-      font-size: $font-size-md;
-      margin: 0 1.5vw;
-      text-align: center;
-
-      @media screen and (max-width: $screen-size-mobile) {
-        font-size: $font-size-sm;
-        margin: 0 2vw;
-        min-width: 0;
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
+      float: left;
     }
-  }
-
-  // dot indicator when page is active
-  .syll {
-    &.indicator {
-      @include pseudo-el-dot();
-
-      transform: scale(1);
-      width: .5em;
+    li a {
+      padding: 20px 30px;
     }
-  }
-
-  // dot animation on large viewports
-  @media screen and (min-width: $screen-size-mobile) {
-  // giving these specific widths so hover animation doesn't move other nav items
-  .studio { width: 8rem; }
-  .projects { width: 9rem; }
-  .blog { width: 5rem; }
-
-  .syll {
-    @include pseudo-el-dot();
-  }
-
-  .item-secondary a {
-    white-space: nowrap;
-    text-align: center;
-  }
-
-  .item-secondary a:hover .syll {
-    &:after {
-
+    .menu {
+      clear: none;
+      float: right;
+      max-height: none;
     }
-
-    transform: scale(1);
-    width: .5em;
-  }
-}
-
-  .syllable-logo {
-    &:before {
-      width: auto;
+    .menu-icon {
+      display: none;
     }
-  }
-
-  img.syllable-logo  {
-    width: 6em;
-    vertical-align: middle;
   }
 }

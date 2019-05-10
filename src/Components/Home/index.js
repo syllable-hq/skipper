@@ -1,7 +1,5 @@
 import React from 'react';
 import NavMain from '../NavMain';
-import NavSide from '../NavSide';
-import Lottie from 'react-lottie';
 import animationData from '../../../public/logo-animation/data.json';
 
 import './index.scss';
@@ -90,37 +88,8 @@ class Home extends React.Component {
         <NavMain activePage='home'/>
         <div className="page-inner">
           <div className="page-panel">
-            <div className="bg bg-building"
-              style={this.state.loadPhase > 1 ? {
-                backgroundImage: `url(${loadPhaseImages[0].src})`,
-                opacity: 1,
-              } : {}}
-            />
-            <div className="bg bg-clouds-wrap" style={this.state.loadPhase > 1 ? {
-                  opacity: 1,
-              } : {}}
-            >
-              <div className="bg bg-clouds"
-                style={this.state.loadPhase > 1 ? {
-                  backgroundImage: `url(${loadPhaseImages[1].src})`,
-                } : {}}
-              />
-            </div>
-            <div className="animation">
-              <a href="/projects" >
-              {
-                this.state.loadPhase > 2 && <Lottie
-                  options={defaultOptions}
-                  ref={el => {this.lottie = el}}
-                  isStopped={this.state.isStopped}
-                  isPaused={this.state.isPaused}
-                />
-              }
-              </a>
-            </div>
           </div>
         </div>
-        <NavSide />
       </div>
     );
   }

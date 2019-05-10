@@ -18,47 +18,11 @@ $cloud-anim-time-demo: 5s;
 
 .page-home {
   .page-panel {
-    // background: rgb(196,196,206);
-    // background: linear-gradient(0deg, rgba(196,196,206,1) 0%, rgba(199,200,205,1) 100%);
-    background: linear-gradient(0deg, $color-sky-bottom 0%, $color-sky-top 100%);
-    // background: linear-gradient(0deg, rgba(196,196,206,1) 0%, rgba(199,200,205,1) 100%);
-    overflow: hidden;
+
+   
 
     .bg {
       @include full-size();
-    }
-
-    .bg-building {
-      // set the background with js to enforce load order
-      // background: url(/background-brooklyn-cropped-masked.png) no-repeat center center fixed;
-      background: no-repeat center center fixed;
-      background-size: cover;
-      z-index: 2;
-      // fade it in on load
-      opacity: 0;
-      transition: opacity .5s;
-    }
-
-    .bg-clouds-wrap {
-      z-index: 1;
-      // fade it in on load
-      opacity: 0;
-      transition: opacity .5s;
-    }
-
-    .bg-clouds {
-      // set the background with js to enforce load order
-      // background: url(/clouds-tile.png);
-      background-repeat: repeat-y;
-      // the image is twice the height of the background
-      background-size: auto 200vh;
-      opacity: .4;
-      background-position: center top;
-      height: 400%;
-      animation-name: clouds;
-      animation-duration: $cloud-anim-time;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
     }
   }
 
@@ -66,10 +30,6 @@ $cloud-anim-time-demo: 5s;
    .page-panel {
       overflow: visible;
       transform: scale(.1);
-
-      .bg-clouds {
-        animation-duration: $cloud-anim-time-demo;
-      }
     }
   }
 

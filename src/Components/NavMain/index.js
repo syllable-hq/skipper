@@ -7,41 +7,17 @@ class NavMain extends React.Component {
   }
 
   render() {
-    const activePage = this.props.activePage;
-
     return (
       <nav className="nav-main">
-        <a className="nav-logo" href="/">
-          <img className={`syllable-logo`} src={`/syllable-logo.svg`} />
-        </a>
-        <ul className="nav-items">
-          <li className="item-secondary studio">
-            <a href="/studio">
-              <span className={activePage === 'studio' ? "syll indicator" : "syll"}></span>
-              Stu
-              <span className="syll"></span>
-                di
-              <span className="syll"></span>
-                o
-              <span className="syll"></span>
-            </a>
-          </li>
-          <li className="item-secondary projects">
-            <a href="/projects">
-              <span className={activePage === 'projects' ? "syll indicator" : "syll"}></span>
-                Pro
-              <span className="syll"></span>
-                jects
-              <span className="syll"></span>
-            </a>
-          </li>
-          <li className="item-secondary blog">
-            <a href="https://blog.syllablehq.com" target='_blank' rel="noopener noreferrer">
-              <span className="syll"></span>
-              Blog
-              <span className="syll"></span>
-            </a>
-          </li>
+        <img className="logo" src={`/skipper_logo.png`} />
+        <input className="menu-btn" type="checkbox" id="menu-btn" />
+        <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
+        <ul className="menu">
+          <li><a href="#work">Dashboard</a></li>
+          <li><a href="#about">About Skipper</a></li>
+          <li><a href="#careers">Contact Skipper</a></li>
+          <li><a href="#contact">FAQ</a></li>
+          <li><a href="#contact">Log out</a></li>
         </ul>
       </nav>
     );
