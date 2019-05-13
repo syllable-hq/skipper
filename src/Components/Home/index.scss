@@ -1,52 +1,33 @@
 @import '../../shared-styles/variables.scss';
 @import '../../shared-styles/mixins.scss';
 
-$cloud-opacity: .4;
-$cloud-anim-time: 250s;
-$cloud-anim-time-demo: 5s;
-
-@keyframes clouds {
-  0% {
-    opacity: $cloud-opacity;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: $cloud-opacity;
-    transform: translateY(-50%);
-  }
-}
-
 .page-home {
+  h1 {
+    display: block;
+    text-align: center;
+    padding: 4rem 0;
+  }
+
+  .info {
+    color: $color-link!important;
+    font-size: 1rem;
+  }
+
+  .generate-button {
+    float: left;
+  }
+
+  .copy-button {
+    float: right;
+  }
+
+  .divider {
+    margin: 4rem 0;
+    padding-top: 4rem;
+  }
+
   .page-panel {
-
-   
-
-    .bg {
-      @include full-size();
-    }
-  }
-
-  &.demo {
-   .page-panel {
-      overflow: visible;
-      transform: scale(.1);
-    }
-  }
-
-  .animation {
-    @include center-both();
-    //  bias it down
-    margin-top: 2vh;
-    width: 30vw;
-    z-index: 4;
-
-    @media screen and (max-width: $screen-size-tablet) {
-      width: 50vw;
-    }
-
-    @media screen and (max-width: $screen-size-tiny) {
-      width: 75vw;
-    }
+    position: relative;
   }
 
   .hidden-preloaders {
@@ -54,5 +35,8 @@ $cloud-anim-time-demo: 5s;
     height: 0;
     width: 0;
     overflow: hidden;
+  }
+  .next-button {
+    float: right;
   }
 }

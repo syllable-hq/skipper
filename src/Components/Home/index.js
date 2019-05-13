@@ -1,6 +1,10 @@
 import React from 'react';
 import NavMain from '../NavMain';
 import animationData from '../../../public/logo-animation/data.json';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import './index.scss';
 
@@ -88,6 +92,29 @@ class Home extends React.Component {
         <NavMain activePage='home'/>
         <div className="page-inner">
           <div className="page-panel">
+            <h1>SIGN UP</h1>
+
+            <Form.Group>
+              <Form.Label>Generate Master Password</Form.Label>
+              <Form.Control type="password" placeholder="Generate me!" disabled="true" />
+            </Form.Group>
+
+            <Form.Group>
+              <Button className="generate-button" variant="secondary">Generate</Button>
+              <Button className="copy-button" variant="secondary">Copy</Button>
+            </Form.Group>
+
+            <div className="divider">OR</div>
+
+            <Form.Group>
+              <Form.Label>Choose your Master Password</Form.Label>
+              <Form.Control type="password" placeholder="xxxxxxxxxxxxxxxx" />
+              <a className="info">Why 15 characters?</a>
+            </Form.Group>
+
+            <Form.Group>
+              <Button className="next-button" variant="secondary">Next</Button>
+            </Form.Group>
           </div>
         </div>
       </div>
