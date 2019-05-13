@@ -13,11 +13,11 @@ class NavMain extends React.Component {
         <input className="menu-btn" type="checkbox" id="menu-btn" />
         <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
         <ul className="menu">
-          <li><a href="#work">Dashboard</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="#about">About Skipper</a></li>
           <li><a href="#careers">Contact Skipper</a></li>
           <li><a href="#contact">FAQ</a></li>
-          <li><a href="#contact">Log out</a></li>
+          <li><a href="/signup">Signup</a></li>
         </ul>
       </nav>
     );

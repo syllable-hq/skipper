@@ -111,7 +111,11 @@ class Home extends React.Component {
             </Form.Group>
 
             <Form.Group>
-              <Button className="next-button" variant="secondary">Next</Button>
+              <a href="/signup_confirmation">
+                <Button className="next-button" variant="secondary">
+                  Next
+                </Button>
+              </a>
             </Form.Group>
           </div>
         </div>
