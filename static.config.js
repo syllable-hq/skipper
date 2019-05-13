@@ -25,6 +25,14 @@ export default {
       component: 'src/Components/Home',
     },
     {
+      path: '/signup_confirmation',
+      component: 'src/Components/SignupConfirmation'
+    },
+    {
+      path: '/signup',
+      component: 'src/Components/Signup'
+    },
+    {
       path: '/projects',
       component: 'src/Components/Projects',
     },
