@@ -24,7 +24,7 @@ function SingupConfirmation() {
           <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" value={userName} onChange={changeUserNameHandler} />
-            <Button class="edit-button" variant="secondary">Edit</Button>
+            <Button className="edit-button" variant="secondary">Edit</Button>
           </Form.Group>
 
           <div>

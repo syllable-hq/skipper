@@ -1,127 +1,64 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import NavMain from '../NavMain';
-import animationData from '../../../public/logo-animation/data.json';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import randomize from 'randomatic';
+import copyClipboard from 'clipboard-copy';
+
+import { 
+  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH
+} from '../../utils/constants';
 
 import './index.scss';
 
-const loadPhaseImages = [
-  {
-    src: '/background-brooklyn-cropped-masked.png',
-  },
-  {
-    src: '/clouds-tile.png',
-  }
-];
+function Home() {
+  const [masterPassword, setMasterPassword] = useState(randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH));
+  const txtPasswordRef = useRef(null);
 
-const delayBtwCloudsAndLogo = 500;
-let loadPhase = 0;
-
-class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoaded: false,
-      isStopped: false,
-      isPaused: false,
-      loadPhase: 0,
-    };
+  function generatePassword() {
+    setMasterPassword(randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH))
   }
 
-  componentDidMount() {
-    this.setState({
-      isLoaded: true,
-    });
+  function copyToClipboard() {
+    copyClipboard(txtPasswordRef.current.value);
   }
 
-  handleImageLoaded = e => {
-    // use loadPhase instead of this.state.loadPhase to ensure that
-    // react doesn't skip one when it optimizes
-    ++loadPhase;
+  return (
+    <div className="page page-home">
+      <NavMain activePage='home'/>
+      <div className="page-inner">
+        <div className="page-panel">
+          <h1>SIGN UP</h1>
 
-    if (loadPhase === 2) {
-      this.setState({
-        loadPhase: loadPhase,
-      });
+          <Form.Group>
+            <Form.Label>Generate Master Password</Form.Label>
+            <Form.Control ref={txtPasswordRef} type="text" value={masterPassword} placeholder="Generate me!" readOnly={true}/>
+          </Form.Group>
 
-      setTimeout(() => {
-        ++loadPhase
+          <Form.Group>
+            <Button onClick={generatePassword} className="generate-button" variant="secondary">Generate</Button>
+            <Button onClick={copyToClipboard} className="copy-button" variant="secondary">Copy</Button>
+          </Form.Group>
 
-        this.setState({
-          loadPhase: loadPhase
-        });
-      }, delayBtwCloudsAndLogo);
-    }
-  }
+          <div className="divider">OR</div>
 
-  handleImageError = e => {
-    console.log('One of the images failed to load')
-  }
+          <Form.Group>
+            <Form.Label>Choose your Master Password</Form.Label>
+            <Form.Control type="password" placeholder="xxxxxxxxxxxxxxxx" />
+            <a className="info">Why 15 characters?</a>
+          </Form.Group>
 
-  render() {
-    // for temp testing
-    let shouldShowClouds = true;
-    let shouldShowDemo;
-
-    if (typeof window !== 'undefined' && window.location.search.indexOf('demo') > 0) {
-      shouldShowDemo = true;
-    }
-
-    const defaultOptions = {
-      // loop, but we'll pause the animation at the end of each loop.
-      loop: false,
-      autoplay: true,
-      animationData: animationData,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice'
-      },
-    };
-
-    const imgSrc0 = this.state.isLoaded ? loadPhaseImages[0].src : null;
-    const imgSrc1 = this.state.isLoaded ? loadPhaseImages[1].src : null;
-
-    return (
-      <div className={`page page-home ${shouldShowClouds ? 'page-clouds' : ''} ${shouldShowDemo ? 'demo' : ''}`}>
-        <div className="hidden-preloaders">
-          <img src={imgSrc0} onLoad={this.handleImageLoaded} onError={this.handleImageError} />
-          <img src={imgSrc1} onLoad={this.handleImageLoaded} onError={this.handleImageError} />
-        </div>
-        <NavMain activePage='home'/>
-        <div className="page-inner">
-          <div className="page-panel">
-            <h1>SIGN UP</h1>
-
-            <Form.Group>
-              <Form.Label>Generate Master Password</Form.Label>
-              <Form.Control type="password" placeholder="Generate me!" disabled="true" />
-            </Form.Group>
-
-            <Form.Group>
-              <Button className="generate-button" variant="secondary">Generate</Button>
-              <Button className="copy-button" variant="secondary">Copy</Button>
-            </Form.Group>
-
-            <div className="divider">OR</div>
-
-            <Form.Group>
-              <Form.Label>Choose your Master Password</Form.Label>
-              <Form.Control type="password" placeholder="xxxxxxxxxxxxxxxx" />
-              <a className="info">Why 15 characters?</a>
-            </Form.Group>
-
-            <Form.Group>
-              <a href="/signup_confirmation">
-                <Button className="next-button" variant="secondary">
-                  Next
-                </Button>
-              </a>
-            </Form.Group>
-          </div>
+          <Form.Group>
+            <a href="/signup_confirmation">
+              <Button className="next-button" variant="secondary">
+                Next
+              </Button>
+            </a>
+          </Form.Group>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Home;
