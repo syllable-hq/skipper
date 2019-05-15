@@ -3,13 +3,22 @@
     position: relative;
   }
 
-  h1 {
-    display: block;
-    text-align: center;
-    padding: 4rem 0;
-  }
-
   td {
     padding: 10px 5px;
+  }
+
+  .btn-add{
+    float: right;
+    text-decoration: none;
+    color: white;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: grey;
+    align-content: center;
+    span {
+      font-size: 4rem;
+      vertical-align: middle;
+    }
   }
 }

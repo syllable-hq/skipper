@@ -29,6 +29,10 @@ export default {
       component: 'src/Components/Dashboard'
     },
     {
+      path: '/credential',
+      component: 'src/Components/Credential'
+    },
+    {
       path: '/signup_confirmation',
       component: 'src/Components/SignupConfirmation'
     },

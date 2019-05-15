@@ -2,12 +2,6 @@
 @import '../../shared-styles/mixins.scss';
 
 .page-home {
-  h1 {
-    display: block;
-    text-align: center;
-    padding: 4rem 0;
-  }
-
   .info {
     color: $color-link!important;
     font-size: 1rem;

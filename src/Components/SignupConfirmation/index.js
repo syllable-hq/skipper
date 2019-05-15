@@ -4,7 +4,7 @@ import './index.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import phonetic from 'phonetic';
-import { USER_KEY } from '../../utils/constants';
+import { USER_KEY } from '../../constants';
 
 function SingupConfirmation() {
   const generatedName = phonetic.generate({ seed: localStorage.getItem(USER_KEY) });

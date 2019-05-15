@@ -10,7 +10,7 @@ import bcrypt from 'bcryptjs';
 import { 
   RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
   USER_KEY
-} from '../../utils/constants';
+} from '../../constants';
 
 import './index.scss';
 

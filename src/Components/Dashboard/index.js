@@ -60,6 +60,10 @@ function Dashboard(params) {
               </tbody>
             </Table>
 
+            <a href="/credential">
+              <button class="btn-add"><span>+</span></button>
+            </a>
+
           </div>
         </div>
     </div>
