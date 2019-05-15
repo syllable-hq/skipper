@@ -25,6 +25,10 @@ export default {
       component: 'src/Components/Home',
     },
     {
+      path: '/login',
+      component: 'src/Components/Login'
+    },
+    {
       path: '/dashboard',
       component: 'src/Components/Dashboard'
     },
