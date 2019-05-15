@@ -3,10 +3,13 @@ import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import phonetic from 'phonetic';
+import { USER_KEY } from '../../utils/constants';
 
 function SingupConfirmation() {
-  
-  const [userName, setUserName] = useState("BlimeyPirate2533");
+  const generatedName = phonetic.generate({ seed: localStorage.getItem(USER_KEY) });
+  const [userName, setUserName] = useState(generatedName);
+
 
   function changeUserNameHandler(evt) {
     console.log(evt.target.value)

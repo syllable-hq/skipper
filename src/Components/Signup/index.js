@@ -1,26 +1,46 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
+import Cookies from 'universal-cookie';
+import bcrypt from 'bcryptjs';
 
 import { 
-  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH
+  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
+  USER_KEY
 } from '../../utils/constants';
 
 import './index.scss';
 
 function Home() {
-  const [masterPassword, setMasterPassword] = useState(randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH));
-  const txtPasswordRef = useRef(null);
+  const [masterPassword, setMasterPassword] = useState(
+    randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
+  );
+  const cookies = new Cookies();
+
+  useEffect(() => {
+    cookies.set('activeMasterPassword', masterPassword, { path: '/' });
+  }, [masterPassword]);
 
   function generatePassword() {
-    setMasterPassword(randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH))
+    const masterPassword = randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
+    setMasterPassword(masterPassword);
+  }
+
+  function nextHandler() {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(masterPassword, salt, function(err, hash) {
+        console.log('userkey', hash);
+        window.location.href = '/signup_confirmation';
+        localStorage.setItem(USER_KEY, hash);
+      });
+    });
   }
 
   function copyToClipboard() {
-    copyClipboard(txtPasswordRef.current.value);
+    copyClipboard(masterPassword);
   }
 
   return (
@@ -32,7 +52,7 @@ function Home() {
 
           <Form.Group>
             <Form.Label>Generate Master Password</Form.Label>
-            <Form.Control ref={txtPasswordRef} type="text" value={masterPassword} placeholder="Generate me!" readOnly={true}/>
+            <Form.Control type="text" value={masterPassword} placeholder="Generate me!" readOnly={true}/>
           </Form.Group>
 
           <Form.Group>
@@ -49,11 +69,9 @@ function Home() {
           </Form.Group>
 
           <Form.Group>
-            <a href="/signup_confirmation">
-              <Button className="next-button" variant="secondary">
-                Next
-              </Button>
-            </a>
+            <Button onClick={nextHandler} className="next-button" variant="secondary">
+              Next
+            </Button>
           </Form.Group>
         </div>
       </div>
