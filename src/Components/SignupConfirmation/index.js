@@ -3,12 +3,11 @@ import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import phonetic from 'phonetic';
-import { USER_KEY } from '../../constants';
+import { getUserInfo } from '../../utils';
+import { DASHBOARD_PATH } from '../../constants';
 
 function SingupConfirmation() {
-  const generatedName = phonetic.generate({ seed: localStorage.getItem(USER_KEY) });
-  const [userName, setUserName] = useState(generatedName);
+  const [userName, setUserName] = useState(getUserInfo().userName);
 
 
   function changeUserNameHandler(evt) {
@@ -41,7 +40,7 @@ function SingupConfirmation() {
           <span>Lets Get Started...</span>
           <Form.Group className="centered">
             <Button variant="secondary">
-              <a className="dashboard-link" href="/">Dashboard</a>
+              <a className="dashboard-link" href={DASHBOARD_PATH}>Dashboard</a>
             </Button>
           </Form.Group>
 

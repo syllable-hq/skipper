@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
-import Table from 'react-bootstrap/Table'
+import Table from 'react-bootstrap/Table';
+import CredentialRow from './CredentialRow';
+import { getCredentials } from '../../utils';
 
 import './index.scss';
 
-function Dashboard(params) {
+function Dashboard() {
+
+  const [credentials, _] = useState(
+    getCredentials()
+  );
+
+  function credentialRow(credential, i) {
+    return <CredentialRow key={i} {...credential}/>
+  }
   return(
     <div className="dashboard">
       <NavMain activePage='home'/>
@@ -21,47 +31,12 @@ function Dashboard(params) {
 
             <Table striped>
               <tbody>
-                <tr>
-                  <td>
-                    <ul>
-                      <li>URL: www.website.com</li>
-                      <li>username: johndoe@gmail.com</li>
-                      <li>password: ******</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
-                      <li>URL: www.website2.com</li>
-                      <li>username: johndoe@gmail.com</li>
-                      <li>password: ******</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
-                      <li>URL: www.website3.com</li>
-                      <li>username: johndoe@gmail.com</li>
-                      <li>password: ******</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
-                      <li>URL: www.website3.com</li>
-                      <li>username: johndoe@gmail.com</li>
-                      <li>password: ******</li>
-                    </ul>
-                  </td>
-                </tr>
+                { credentials.map(credentialRow) }
               </tbody>
             </Table>
 
             <a href="/credential">
-              <button class="btn-add"><span>+</span></button>
+              <button className="btn-add"><span>+</span></button>
             </a>
 
           </div>

@@ -2,14 +2,26 @@ import React, { useRef } from 'react';
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import bcrypt from 'bcryptjs';
 
+import {
+  CURRENT_USER_KEY, DASHBOARD_PATH
+} from '../../constants';
 import './index.scss';
 
 function Login() {
   const inputPasswordEl = useRef(null);
 
   function loginAction() {
-    console.log(inputPasswordEl.current.value)
+    const password = inputPasswordEl.current.value;
+    const foundKey = Object.keys(localStorage).find(key => {
+      const response = bcrypt.compareSync(password, key);
+      return response;
+    });
+    if (foundKey) {
+      localStorage.setItem(CURRENT_USER_KEY, foundKey);
+      window.location.href = DASHBOARD_PATH;
+    }
   }
 
   return(

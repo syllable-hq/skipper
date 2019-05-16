@@ -7,9 +7,10 @@ import copyClipboard from 'clipboard-copy';
 import Cookies from 'universal-cookie';
 import bcrypt from 'bcryptjs';
 
+import { createUserStorage } from '../../utils';
 import { 
   RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
-  USER_KEY
+  CURRENT_USER_KEY, SIGNUP_CONFIRMATION_PATH
 } from '../../constants';
 
 import './index.scss';
@@ -32,9 +33,9 @@ function Home() {
   function nextHandler() {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(masterPassword, salt, function(err, hash) {
-        console.log('userkey', hash);
-        window.location.href = '/signup_confirmation';
-        localStorage.setItem(USER_KEY, hash);
+        createUserStorage(hash);
+        localStorage.setItem(CURRENT_USER_KEY, hash);
+        window.location.href = SIGNUP_CONFIRMATION_PATH;
       });
     });
   }

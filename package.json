@@ -26,6 +26,7 @@
     "react-lottie": "^1.2.3",
     "react-static": "^6.0.18",
     "react-static-plugin-sass": "6.3.0",
+    "simple-crypto-js": "2.0.2",
     "universal-cookie": "4.0.0"
   },
   "devDependencies": {
