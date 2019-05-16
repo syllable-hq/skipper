@@ -32,8 +32,7 @@ export function addCredentialInfo(info) {
   const cypherCredential = cypherObject(info)
   const userInfo = getUserInfo();
   userInfo.credentials = [...userInfo.credentials, cypherCredential];
-  const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
-  localStorage.setItem(currentUserKey, JSON.stringify(userInfo))
+  saveUserInfo(userInfo);
 }
 
 export function createUserStorage(userKey) {
@@ -49,4 +48,23 @@ export function createUserStorage(userKey) {
 
 function generateUserNameFromHash() {
  return phonetic.generate({ seed: localStorage.getItem(USER_KEY) });
+}
+
+export function logout() {
+  localStorage.removeItem(CURRENT_USER_KEY);
+}
+
+export function userLogged() {
+  return !!localStorage.getItem(CURRENT_USER_KEY);
+}
+
+export function updateUserName(userName) {
+  const userInfo = getUserInfo();
+  userInfo.userName = userName;
+  saveUserInfo(userInfo);
+}
+
+function saveUserInfo(userInfo) {
+  const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
+  localStorage.setItem(currentUserKey, JSON.stringify(userInfo))
 }

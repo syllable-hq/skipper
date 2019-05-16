@@ -3,15 +3,17 @@ import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import CredentialRow from './CredentialRow';
-import { getCredentials } from '../../utils';
-
+import { getCredentials, userLogged } from '../../utils';
+import { LOGIN_PATH } from '../../constants';
 import './index.scss';
 
 function Dashboard() {
-
+  if (!userLogged()) {
+    return window.location.href = LOGIN_PATH;
+  }
   const [credentials, _] = useState(
     getCredentials()
-  );
+  );  
 
   function credentialRow(credential, i) {
     return <CredentialRow key={i} {...credential}/>

@@ -3,7 +3,7 @@ import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { getUserInfo } from '../../utils';
+import { getUserInfo, updateUserName } from '../../utils';
 import { DASHBOARD_PATH } from '../../constants';
 
 function SingupConfirmation() {
@@ -12,6 +12,11 @@ function SingupConfirmation() {
 
   function changeUserNameHandler(evt) {
     console.log(evt.target.value)
+    setUserName(evt.target.value);
+  }
+
+  function editUsername() {
+    updateUserName(userName);
   }
 
   return(
@@ -25,8 +30,8 @@ function SingupConfirmation() {
           <h2>Welcome Aboard!</h2>
           <Form.Group>
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" value={userName} onChange={changeUserNameHandler} />
-            <Button className="edit-button" variant="secondary">Edit</Button>
+            <Form.Control  type="text" value={userName} onChange={changeUserNameHandler} />
+            <Button className="edit-button" onClick={editUsername} variant="secondary">Edit</Button>
           </Form.Group>
 
           <div>
