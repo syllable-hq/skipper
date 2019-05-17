@@ -13,7 +13,7 @@ function NavMain() {
       <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
       <ul className="menu">
         <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="#about">About Skipper</a></li>
+        <li><a href="/about">About Skipper</a></li>
         <li><a href="#careers">Contact Skipper</a></li>
         <li>
           <a href={userIsLogged ? '/login' : '/signup'}>
