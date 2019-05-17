@@ -40,7 +40,7 @@ function Login() {
           <h1>LOGIN</h1>
 
           <Form.Group className="form-group">
-            <Form.Label>Master Passowrd</Form.Label>
+            <Form.Label>Master Password</Form.Label>
             <Form.Control ref={inputPasswordEl} type="text" />
             <a href="/">What if I forget my Master Password?</a>
           </Form.Group>
