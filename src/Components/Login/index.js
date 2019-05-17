@@ -4,11 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert'
 import bcrypt from 'bcryptjs';
-
-import { logout } from '../../utils';
+import { logout, saveMasterPassword } from '../../utils';
 
 import {
-  CURRENT_USER_KEY, DASHBOARD_PATH
+  DASHBOARD_PATH,
+  CURRENT_USER_KEY,
 } from '../../constants';
 import './index.scss';
 
@@ -16,6 +16,7 @@ function Login() {
   logout();
   const inputPasswordEl = useRef(null);
   const [message, setMessage] = useState('');
+
   function loginAction() {
     const password = inputPasswordEl.current.value;
     const foundKey = Object.keys(localStorage).find(key => {
@@ -24,6 +25,7 @@ function Login() {
     });
     if (foundKey) {
       localStorage.setItem(CURRENT_USER_KEY, foundKey);
+      saveMasterPassword(password);
       window.location.href = DASHBOARD_PATH;
     }else {
       setMessage('Password not found');

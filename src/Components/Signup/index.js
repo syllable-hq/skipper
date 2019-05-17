@@ -4,13 +4,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
-import Cookies from 'universal-cookie';
 import bcrypt from 'bcryptjs';
 
-import { createUserStorage } from '../../utils';
+import {
+  createUserStorage,
+  saveMasterPassword,
+ } from '../../utils';
 import { 
   RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
-  CURRENT_USER_KEY, SIGNUP_CONFIRMATION_PATH
+  SIGNUP_CONFIRMATION_PATH,
+  CURRENT_USER_KEY,
 } from '../../constants';
 
 import './index.scss';
@@ -19,10 +22,9 @@ function Home() {
   const [masterPassword, setMasterPassword] = useState(
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
   );
-  const cookies = new Cookies();
 
   useEffect(() => {
-    cookies.set('activeMasterPassword', masterPassword, { path: '/' });
+    saveMasterPassword(masterPassword);
   }, [masterPassword]);
 
   function generatePassword() {

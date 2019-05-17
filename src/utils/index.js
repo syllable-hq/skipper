@@ -1,12 +1,35 @@
 import SimpleCrypto from "simple-crypto-js";
-import { USER_KEY, CURRENT_USER_KEY } from "../constants";
 import phonetic from 'phonetic';
+import Cookies from 'universal-cookie';
+import {
+  USER_KEY,
+  COOKIE_MASTER_PASSWORD,
+  MASTER_PASS_SECRET,
+  CURRENT_USER_KEY,
+} from "../constants";
+
+export function saveMasterPassword(masterPassword) {
+  const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
+  const cookies = new Cookies();
+  const masterPass = simpleCrypto.encrypt(masterPassword);
+  cookies.set(COOKIE_MASTER_PASSWORD, masterPass, { path: '/' });
+}
+
+function getMasterPassword() {
+  const cookies = new Cookies();
+  const encryptedMasterPass = cookies.get(COOKIE_MASTER_PASSWORD);
+  const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
+  return simpleCrypto.decrypt(encryptedMasterPass);
+}
 
 function cypherObject(object) {
-  const secret = localStorage.getItem(CURRENT_USER_KEY);
-  var simpleCrypto = new SimpleCrypto(secret);
-  const objectStringed = JSON.stringify(object);
-  return simpleCrypto.encrypt(objectStringed);
+  const cookies = new Cookies();
+  const masterPass = getMasterPassword();
+  var simpleCrypto = new SimpleCrypto(masterPass);
+  if (typeof object === 'object') {
+    const object = JSON.stringify(object);  
+  }
+  return simpleCrypto.encrypt(object);
 }
 
 export function getUserInfo() {
@@ -18,10 +41,9 @@ export function getUserInfo() {
 export function getCredentials() {
   const userInfo = getUserInfo();
   const credentials = userInfo.credentials;
-  
-  var simpleCrypto = new SimpleCrypto(
-    localStorage.getItem(CURRENT_USER_KEY)
-  );
+  const cookies = new Cookies();
+  const masterPass = getMasterPassword();
+  var simpleCrypto = new SimpleCrypto(masterPass);
   return credentials.map(cred => {
     const decryptedCredential = simpleCrypto.decrypt(cred);
     return JSON.parse(decryptedCredential);
@@ -52,6 +74,8 @@ function generateUserNameFromHash() {
 
 export function logout() {
   localStorage.removeItem(CURRENT_USER_KEY);
+  const cookies = new Cookies();
+  cookies.remove(COOKIE_MASTER_PASSWORD);
 }
 
 export function userLogged() {
