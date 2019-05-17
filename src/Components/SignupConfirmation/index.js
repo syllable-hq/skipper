@@ -3,11 +3,11 @@ import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { getUserInfo, updateUserName } from '../../utils';
+import { getUserName, updateUserName } from '../../utils';
 import { DASHBOARD_PATH } from '../../constants';
 
 function SingupConfirmation() {
-  const [userName, setUserName] = useState(getUserInfo().userName);
+  const [userName, setUserName] = useState(getUserName());
 
 
   function changeUserNameHandler(evt) {

@@ -38,6 +38,12 @@ export function getUserInfo() {
   return JSON.parse(userInfo);
 }
 
+export function getUserName() {
+  let userInfo = getUserInfo();
+  const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
+  return simpleCrypto.decrypt(userInfo.userName);
+}
+
 export function getCredentials() {
   const userInfo = getUserInfo();
   const credentials = userInfo.credentials;
@@ -59,10 +65,12 @@ export function addCredentialInfo(info) {
 
 export function createUserStorage(userKey) {
   const userName = generateUserNameFromHash(userKey);
+  const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
+
   const userInfo = {
     userKey: userKey,
     credentials: [],
-    userName: userName
+    userName: simpleCrypto.encrypt(userName),
   };
   
   localStorage.setItem(userKey, JSON.stringify(userInfo));
@@ -84,7 +92,8 @@ export function userLogged() {
 
 export function updateUserName(userName) {
   const userInfo = getUserInfo();
-  userInfo.userName = userName;
+  const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
+  userInfo.userName = simpleCrypto.encrypt(userName);
   saveUserInfo(userInfo);
 }
 
