@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavMain from '../NavMain';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import copyClipboard from 'clipboard-copy';
+import Alert from 'react-bootstrap/Alert';
 
 import { DASHBOARD_PATH } from '../../constants';
 import { getCredentialAt } from '../../utils';
 
 import './index.scss';
 
-function RowItem({label, value}) {
+function RowItem({label, value, valueCopiedHandler}) {
   return(
     <Row>
-      <Col>
+      <Col className="text-left">
         <Row>
           <Col>
             <Form.Label>{label}:</Form.Label>
@@ -26,8 +27,8 @@ function RowItem({label, value}) {
           </Col>
         </Row>
       </Col>
-      <Col>
-        <Button className="btn-copy" onClick={() => copyClipboard(value)} variant="secondary">Copy</Button>
+      <Col className="text-rigth">
+        <Button className="btn-copy" onClick={() => valueCopiedHandler(value)} variant="secondary">Copy</Button>
       </Col>
     </Row>
   );
@@ -36,6 +37,13 @@ function RowItem({label, value}) {
 function Secrets(props) {
   const { id } = props;
   const credential = getCredentialAt(id);
+  const [copiedFlag, setFlag] = useState(false);
+
+  function valueCopiedHandler(value) {
+    setFlag(true);
+    copyClipboard(value);
+    setTimeout(() => setFlag(false), 2000)
+  }
   return(
     <div className="page-secrets">
       <NavMain />
@@ -43,22 +51,25 @@ function Secrets(props) {
         <div className="page-panel">
 
           <h1>SECRET BURIED:</h1>
-          <span>Secret Info:</span>
+          { copiedFlag && <Alert className="alert-copied" variant="info">
+            Value Copied!
+          </Alert> }
+          <span className="subtitle">Secret Info:</span>
 
           <Form.Group>
-            <RowItem label="URL" value={credential.website} />
+            <RowItem valueCopiedHandler={valueCopiedHandler} label="URL" value={credential.website} />
           </Form.Group>
 
           <Form.Group>
-            <RowItem label="Username Primary" value={credential.primaryUser} />
+            <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Primary" value={credential.primaryUser} />
           </Form.Group>
 
           <Form.Group>
-            <RowItem label="Username Secondary" value={credential.secundaryUser} />
+            <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Secondary" value={credential.secundaryUser} />
           </Form.Group>
 
           <Form.Group>
-            <RowItem label="Secret" value={credential.password} />
+            <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={credential.password} />
           </Form.Group>
 
           <Form.Group>

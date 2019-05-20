@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
 import bcrypt from 'bcryptjs';
+import Alert from 'react-bootstrap/Alert';
 
 import {
   createUserStorage,
@@ -22,6 +23,7 @@ function Home() {
   const [masterPassword, setMasterPassword] = useState(
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
   );
+  const [copiedFlag, setFlag] = useState(false);
 
   useEffect(() => {
     saveMasterPassword(masterPassword);
@@ -44,6 +46,8 @@ function Home() {
 
   function copyToClipboard() {
     copyClipboard(masterPassword);
+    setFlag(true);
+    setTimeout(() => setFlag(false), 2000)
   }
 
   return (
@@ -52,7 +56,9 @@ function Home() {
       <div className="page-inner">
         <div className="page-panel">
           <h1>SIGN UP</h1>
-
+          { copiedFlag && <Alert className="alert-copied" variant="info">
+            Value Copied!
+          </Alert> }
           <Form.Group>
             <Form.Label>Generate Master Password</Form.Label>
             <Form.Control type="text" value={masterPassword} placeholder="Generate me!" readOnly={true}/>

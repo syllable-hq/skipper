@@ -9,9 +9,7 @@ import { DASHBOARD_PATH } from '../../constants';
 function SingupConfirmation() {
   const [userName, setUserName] = useState(getUserName());
 
-
   function changeUserNameHandler(evt) {
-    console.log(evt.target.value)
     setUserName(evt.target.value);
   }
 
