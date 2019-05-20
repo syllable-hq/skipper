@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 
-function CredentialRow({website, primaryUser, secundaryUser, password}) {
+function CredentialRow({website, primaryUser, secundaryUser, password, goToCredential}) {
   return(
-    <tr>
+    <tr onClick={goToCredential}>
       <td>
         <ul>
           <li>URL: {website}</li>

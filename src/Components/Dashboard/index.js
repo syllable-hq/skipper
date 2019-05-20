@@ -14,9 +14,13 @@ function Dashboard() {
   const [credentials, _] = useState(
     getCredentials()
   );  
-
   function credentialRow(credential, i) {
-    return <CredentialRow key={i} {...credential}/>
+    return <CredentialRow key={i} {...credential}
+      goToCredential={() => goToCredential(i)} />
+  }
+
+  function goToCredential(itemIndex) {
+    window.location.href = `/secrets/${itemIndex}`;
   }
   return(
     <div className="dashboard">

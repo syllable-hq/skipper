@@ -44,6 +44,15 @@ export function getUserName() {
   return simpleCrypto.decrypt(userInfo.userName);
 }
 
+export function getCredentialAt(index) {
+  const userInfo = getUserInfo();
+  const credential = userInfo.credentials[index];
+  const masterPass = getMasterPassword();
+  var simpleCrypto = new SimpleCrypto(masterPass);
+  const decryptedCredential = simpleCrypto.decrypt(credential);
+  return JSON.parse(decryptedCredential);
+}
+
 export function getCredentials() {
   const userInfo = getUserInfo();
   const credentials = userInfo.credentials;
