@@ -1,5 +1,4 @@
 import React from 'react';
-import NavMain from '../NavMain';
 import { userLogged } from '../../utils';
 
 function Home() {
@@ -12,7 +11,7 @@ function Home() {
 
   return(
     <div>
-      <NavMain />
+      ...
     </div>
   );
 }

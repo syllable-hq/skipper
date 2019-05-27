@@ -8,7 +8,9 @@ function NavMain() {
   const userIsLogged = userLogged();
   return (
     <nav className="nav-main">
-      <img className="logo" src={`/skipper_logo.png`} />
+      <a href="/">
+        <img className="logo" src={`/skipper_logo.png`} />
+      </a>
       <input className="menu-btn" type="checkbox" id="menu-btn" />
       <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
       <ul className="menu">
