@@ -3,8 +3,11 @@ import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
+
 import {
-  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH, DASHBOARD_PATH
+  RANDOMIZE_PATTERN,
+  RANDOMIZE_LENGTH,
+  DASHBOARD_PATH,
 } from '../../constants';
 import { addCredentialInfo } from '../../utils';
 
@@ -66,6 +69,9 @@ function Credential() {
           </Form.Group>
 
           <Form.Group>
+            <a href={DASHBOARD_PATH}>
+              <Button variant="secondary">Cancel</Button>
+            </a>
             <Button onClick={addCredential} className="save-button" variant="secondary">Save</Button>
           </Form.Group>
         </div>  
