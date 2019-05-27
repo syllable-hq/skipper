@@ -4,12 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
-import bcrypt from 'bcryptjs';
 import Alert from 'react-bootstrap/Alert';
 
 import {
   createUserStorage,
   saveMasterPassword,
+  passwordStored,
  } from '../../utils';
 import { 
   RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
@@ -24,6 +24,8 @@ function Home() {
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
   );
   const [copiedFlag, setFlag] = useState(false);
+  const [message, setMessage] = useState('');
+  const [typedPassword, setTypedPassword] = useState('');
 
   useEffect(() => {
     saveMasterPassword(masterPassword);
@@ -34,7 +36,18 @@ function Home() {
     setMasterPassword(masterPassword);
   }
 
+  function typedPasswordHandler(evt) {
+    setTypedPassword(evt.target.value);
+  }
+
   function nextHandler() {
+    const passwordToUse = typedPassword ? typedPassword : masterPassword;
+    const passwordFound = passwordStored(passwordToUse);
+
+    if (passwordFound) {
+      setMessage('Password was found');
+      return;
+    }
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(masterPassword, salt, function(err, hash) {
         createUserStorage(hash);
@@ -56,6 +69,7 @@ function Home() {
       <div className="page-inner">
         <div className="page-panel">
           <h1>SIGN UP</h1>
+          { message && <Alert variant='danger'> {message} </Alert> }
           { copiedFlag && <Alert className="alert-copied" variant="info">
             Value Copied!
           </Alert> }
@@ -73,7 +87,7 @@ function Home() {
 
           <Form.Group>
             <Form.Label>Choose your Master Password</Form.Label>
-            <Form.Control type="password" placeholder="xxxxxxxxxxxxxxxx" />
+            <Form.Control type="password" value={typedPassword} onChange={typedPasswordHandler} placeholder="xxxxxxxxxxxxxxxx" />
             <a className="info">Why 15 characters?</a>
           </Form.Group>
 

@@ -3,8 +3,12 @@ import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert'
-import bcrypt from 'bcryptjs';
-import { logout, saveMasterPassword } from '../../utils';
+
+import {
+  logout,
+  saveMasterPassword,
+  passwordStored,
+} from '../../utils';
 
 import {
   DASHBOARD_PATH,
@@ -19,10 +23,7 @@ function Login() {
 
   function loginAction() {
     const password = inputPasswordEl.current.value;
-    const foundKey = Object.keys(localStorage).find(key => {
-      const response = bcrypt.compareSync(password, key);
-      return response;
-    });
+    const foundKey = passwordStored(password);
     if (foundKey) {
       localStorage.setItem(CURRENT_USER_KEY, foundKey);
       saveMasterPassword(password);

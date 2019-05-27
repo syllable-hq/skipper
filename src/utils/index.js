@@ -1,6 +1,8 @@
 import SimpleCrypto from "simple-crypto-js";
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
+import bcrypt from 'bcryptjs';
+
 import {
   USER_KEY,
   COOKIE_MASTER_PASSWORD,
@@ -109,4 +111,12 @@ export function updateUserName(userName) {
 function saveUserInfo(userInfo) {
   const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
   localStorage.setItem(currentUserKey, JSON.stringify(userInfo))
+}
+
+export function passwordStored(password) {
+  const foundKey = Object.keys(localStorage).find(key => {
+    const response = bcrypt.compareSync(password, key);
+    return response;
+  });
+  return foundKey;
 }

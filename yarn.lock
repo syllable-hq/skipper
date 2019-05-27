@@ -8303,7 +8303,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-crypto-js@^2.0.2:
+simple-crypto-js@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/simple-crypto-js/-/simple-crypto-js-2.0.2.tgz#8075fe0ffa984f70027dd3e148a240f2603732c9"
   integrity sha1-gHX+D/qYT3ACfdPhSKJA8mA3Msk=
