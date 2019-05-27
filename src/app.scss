@@ -59,6 +59,8 @@ h1 {
 }
 
 .page-inner {
+  max-width: $maxWidth;
+  margin: 0 auto;
   box-sizing: border-box;
   height: 100vh;
   // offset for the nav-sides
