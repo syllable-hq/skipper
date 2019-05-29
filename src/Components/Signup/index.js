@@ -7,14 +7,13 @@ import copyClipboard from 'clipboard-copy';
 import Alert from 'react-bootstrap/Alert';
 
 import {
-  createUserStorage,
   saveMasterPassword,
   passwordStored,
+  signUp,
  } from '../../utils';
 import { 
-  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
-  SIGNUP_CONFIRMATION_PATH,
-  CURRENT_USER_KEY,
+  RANDOMIZE_PATTERN,
+  RANDOMIZE_LENGTH,
 } from '../../constants';
 
 import './index.scss';
@@ -48,13 +47,7 @@ function Home() {
       setMessage('Password was found');
       return;
     }
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(masterPassword, salt, function(err, hash) {
-        createUserStorage(hash);
-        localStorage.setItem(CURRENT_USER_KEY, hash);
-        window.location.href = SIGNUP_CONFIRMATION_PATH;
-      });
-    });
+    signUp(passwordToUse);
   }
 
   function copyToClipboard() {

@@ -8,6 +8,7 @@ import {
   COOKIE_MASTER_PASSWORD,
   MASTER_PASS_SECRET,
   CURRENT_USER_KEY,
+  SIGNUP_CONFIRMATION_PATH,
 } from "../constants";
 
 export function saveMasterPassword(masterPassword) {
@@ -74,7 +75,7 @@ export function addCredentialInfo(info) {
   saveUserInfo(userInfo);
 }
 
-export function createUserStorage(userKey) {
+function createUserStorage(userKey) {
   const userName = generateUserNameFromHash(userKey);
   const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
 
@@ -146,5 +147,15 @@ export function filterList(q, list) {
   );
   return list.filter(item => {
     return searchRegex.test(item.website);
+  });
+}
+
+export function signUp(password) {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(password, salt, function(err, hash) {
+      createUserStorage(hash);
+      localStorage.setItem(CURRENT_USER_KEY, hash);
+      window.location.href = SIGNUP_CONFIRMATION_PATH;
+    });
   });
 }
