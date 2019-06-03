@@ -7,6 +7,7 @@ import {
   getCredentials,
   userLogged,
   filterList,
+  buildURLParam,
 } from '../../utils';
 
 import { LOGIN_PATH } from '../../constants';
@@ -27,7 +28,9 @@ function Dashboard() {
   }
 
   function goToCredential(itemIndex) {
-    window.location.href = `/secrets/${itemIndex}`;
+    const credential = credentials[itemIndex];
+    delete credential.password;
+    window.location.href = `/secrets/${itemIndex}?${buildURLParam(credential)}`;
   }
 
   function searchHandler(evt) {
