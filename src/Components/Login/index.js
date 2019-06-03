@@ -34,6 +34,11 @@ function Login(props) {
         users.push(userObject);
       });
       const userFound = findUserMatch(password, users);
+      if(!userFound) {
+        setMessage('User Not Found');
+        setTimeout(() => setMessage(''), 2000);
+        return;
+      }
       saveMasterPassword(password);
       localStorage.setItem(userFound.userKey, JSON.stringify(userFound));
       localStorage.setItem(CURRENT_USER_KEY, userFound.userKey);
@@ -51,7 +56,7 @@ function Login(props) {
           <Form>
             <Form.Group className="form-group">
               <Form.Label>Master Password</Form.Label>
-              <Form.Control ref={inputPasswordEl} type="text" />
+              <Form.Control ref={inputPasswordEl} type="password" />
               <a href="/">What if I forget my Master Password?</a>
             </Form.Group>
             { message && <Alert variant='danger'> {message} </Alert> }
