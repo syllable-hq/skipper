@@ -3,6 +3,7 @@ import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
+import { withFirebase } from '../../Firebase';
 
 import {
   RANDOMIZE_PATTERN,
@@ -13,7 +14,7 @@ import { addCredentialInfo } from '../../utils';
 
 import './index.scss';
 
-function Credential() {
+function Credential(props) {
 
   const [password, setPassword] = useState(
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
@@ -28,8 +29,11 @@ function Credential() {
   }
 
   function addCredential() {
-    addCredentialInfo({website, password, primaryUser, secundaryUser});
-    window.location.href = DASHBOARD_PATH;
+    const userInfo = addCredentialInfo({website, password, primaryUser, secundaryUser});
+    props.db.saveUserInfo(userInfo)
+    .then(() => {
+      window.location.href = DASHBOARD_PATH;
+    })
   }
 
   function changeWebsiteHandler(evt) {
@@ -45,7 +49,7 @@ function Credential() {
   }
   
   return(
-    <div className="page-credential">
+    <div className="page page-credential">
       <NavMain activePage='home'/>
       <div className="page-inner">
         <div className="page-panel">
@@ -80,4 +84,4 @@ function Credential() {
   )
 }
 
-export default Credential;
+export default withFirebase(Credential);
