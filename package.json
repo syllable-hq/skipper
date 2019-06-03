@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "bundle": "react-static bundle",
-    "export": "react-static export",
+    "start": "dotenv react-static start",
+    "stage": "dotenv react-static build --staging",
+    "build": "dotenv react-static build",
+    "bundle": "dotenv react-static bundle",
+    "export": "dotenv react-static export",
     "serve": "serve dist -p 3000 -s"
   },
   "dependencies": {
@@ -17,6 +17,8 @@
     "bcryptjs": "2.4.3",
     "bootstrap": "4.3.1",
     "clipboard-copy": "3.0.0",
+    "dotenv": "8.0.0",
+    "firebase": "6.1.0",
     "phonetic": "0.1.1",
     "randomatic": "3.1.1",
     "react": "^16.8.1",

@@ -8,7 +8,6 @@ import {
   COOKIE_MASTER_PASSWORD,
   MASTER_PASS_SECRET,
   CURRENT_USER_KEY,
-  SIGNUP_CONFIRMATION_PATH,
 } from "../constants";
 
 export function saveMasterPassword(masterPassword) {
@@ -73,6 +72,7 @@ export function addCredentialInfo(info) {
   const userInfo = getUserInfo();
   userInfo.credentials = [...userInfo.credentials, cypherCredential];
   saveUserInfo(userInfo);
+  return userInfo;
 }
 
 function createUserStorage(userKey) {
@@ -86,6 +86,8 @@ function createUserStorage(userKey) {
   };
   
   localStorage.setItem(userKey, JSON.stringify(userInfo));
+  localStorage.setItem(CURRENT_USER_KEY, userKey);
+  return userInfo;
 }
 
 function generateUserNameFromHash() {
@@ -93,7 +95,8 @@ function generateUserNameFromHash() {
 }
 
 export function logout() {
-  localStorage.removeItem(CURRENT_USER_KEY);
+  // localStorage.removeItem(CURRENT_USER_KEY);
+  localStorage.clear();
   const cookies = new Cookies();
   cookies.remove(COOKIE_MASTER_PASSWORD);
 }
@@ -112,14 +115,6 @@ export function updateUserName(userName) {
 function saveUserInfo(userInfo) {
   const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
   localStorage.setItem(currentUserKey, JSON.stringify(userInfo))
-}
-
-export function passwordStored(password) {
-  const foundKey = Object.keys(localStorage).find(key => {
-    const response = bcrypt.compareSync(password, key);
-    return response;
-  });
-  return foundKey;
 }
 
 export function filterList(q, list) {
@@ -150,12 +145,24 @@ export function filterList(q, list) {
   });
 }
 
-export function signUp(password) {
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-      createUserStorage(hash);
-      localStorage.setItem(CURRENT_USER_KEY, hash);
-      window.location.href = SIGNUP_CONFIRMATION_PATH;
+export function cypherMasterPassword(password) {
+  return new Promise(function(resolve, reject) {
+    bcrypt.genSalt(10, function (err, salt) {
+      if(err){
+        return reject(err);
+      }
+      bcrypt.hash(password, salt, function(err, hash) {
+        if(err) {
+          return reject(err);
+        }
+        resolve(hash);
+      });
     });
+  })
+}
+
+export function findUserMatch(password, users) {
+  return users.find(user => {
+    return bcrypt.compareSync(password, user.userKey)
   });
 }

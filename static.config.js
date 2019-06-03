@@ -1,7 +1,9 @@
 import React from 'react';
+import dotenv from 'dotenv';
+dotenv.config();
 
- const siteRoot = 'https://www.syllablehq.com';
- const stagingSiteRoot = 'http://localhost:3000';
+const siteRoot = 'https://www.syllablehq.com';
+const stagingSiteRoot = 'http://localhost:3000';
 
 // static.config.js
 export default {
