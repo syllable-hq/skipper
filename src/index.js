@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Firebase, { FirebaseContext } from './Firebase';
 
 // Your top level component
 import App from './App'
@@ -14,7 +15,10 @@ if (typeof document !== 'undefined') {
     : ReactDOM.hydrate || ReactDOM.render
 
   const render = Comp => {
-    renderMethod(<Comp />, document.getElementById('root'))
+    renderMethod(
+      <FirebaseContext.Provider value={new Firebase()}>
+        <Comp />
+      </FirebaseContext.Provider>, document.getElementById('root'))
   }
 
   // Render!

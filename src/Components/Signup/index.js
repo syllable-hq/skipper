@@ -5,21 +5,24 @@ import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
 import Alert from 'react-bootstrap/Alert';
+import { withFirebase } from '../../Firebase';
 
 import {
-  createUserStorage,
   saveMasterPassword,
-  passwordStored,
+  findUserMatch,
+  cypherMasterPassword,
+  createUserStorage,
  } from '../../utils';
 import { 
-  RANDOMIZE_PATTERN, RANDOMIZE_LENGTH,
+  RANDOMIZE_PATTERN,
+  RANDOMIZE_LENGTH,
   SIGNUP_CONFIRMATION_PATH,
-  CURRENT_USER_KEY,
+  USER_ID,
 } from '../../constants';
 
 import './index.scss';
 
-function Home() {
+function Signup(props) {
   const [masterPassword, setMasterPassword] = useState(
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
   );
@@ -42,18 +45,29 @@ function Home() {
 
   function nextHandler() {
     const passwordToUse = typedPassword ? typedPassword : masterPassword;
-    const passwordFound = passwordStored(passwordToUse);
 
-    if (passwordFound) {
-      setMessage('Password was found');
-      return;
-    }
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(masterPassword, salt, function(err, hash) {
-        createUserStorage(hash);
-        localStorage.setItem(CURRENT_USER_KEY, hash);
-        window.location.href = SIGNUP_CONFIRMATION_PATH;
+    props.db.getAllUsers()
+    .then(querySnapshot => {
+      const users = [];
+      querySnapshot.forEach(function(doc) {
+        const userObject = Object.assign({}, doc.data(), {id: doc.id});
+        users.push(userObject);
       });
+
+      const userFound = findUserMatch(passwordToUse, users);
+      if (userFound) {
+        setMessage('Password Found');
+        return;
+      }
+      return cypherMasterPassword(passwordToUse)
+    })
+    .then(hashedPassword => {
+      const user = createUserStorage(hashedPassword);
+      return props.db.createUserInfo(user);
+    })
+    .then(doc => {
+      localStorage.setItem(USER_ID, doc.id);
+      window.location.href = SIGNUP_CONFIRMATION_PATH;
     });
   }
 
@@ -102,4 +116,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default withFirebase(Signup);

@@ -28,3 +28,16 @@ Yarn serve just serves the static build from the `/dist` folder. This folder can
 
 ## Deploying
 The app is running on [netlify.com](https://app.netlify.com/). The website will deploy automatically to [syllablehq.com](https://www.syllablehq.com/) when code is pushed to the `master` branch.
+
+## Env variables
+
+Use proper env variables values
+
+```
+REACT_APP_API_KEY=XXXXxxxx
+REACT_APP_AUTH_DOMAIN=xxxxXXXX.firebaseapp.com
+REACT_APP_DATABASE_URL=https://xxxXXXX.firebaseio.com
+REACT_APP_PROJECT_ID=xxxxXXXX
+REACT_APP_STORAGE_BUCKET=xxxxXXXX.appspot.com
+REACT_APP_MESSAGING_SENDER_ID=xxxxXXXX
+```

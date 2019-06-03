@@ -42,9 +42,11 @@ function SingupConfirmation() {
 
           <span>Lets Get Started...</span>
           <Form.Group className="centered">
-            <Button variant="secondary">
-              <a className="dashboard-link" href={DASHBOARD_PATH}>Dashboard</a>
-            </Button>
+            <a href={DASHBOARD_PATH}>
+              <Button variant="secondary">
+                Dashboard
+              </Button>
+            </a>
           </Form.Group>
 
         </div>
