@@ -7,3 +7,4 @@ export const LOGIN_PATH = '/login';
 export const COOKIE_MASTER_PASSWORD = 'activeMasterPassword';
 export const MASTER_PASS_SECRET = 'skipperMasterPass';
 export const CURRENT_USER_KEY = 'CURRENT_USER_KEY';
+export const USER_ID = 'USER_ID';

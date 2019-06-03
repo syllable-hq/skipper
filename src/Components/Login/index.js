@@ -4,20 +4,23 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import bcrypt from 'bcryptjs';
+import { withFirebase } from '../../Firebase';
 
 import {
   logout,
   saveMasterPassword,
-  passwordStored,
+  cypherMasterPassword,
+  findUserMatch,
 } from '../../utils';
 
 import {
   DASHBOARD_PATH,
   CURRENT_USER_KEY,
+  USER_ID,
 } from '../../constants';
 import './index.scss';
 
-function Login() {
+function Login(props) {
   logout();
   const inputPasswordEl = useRef(null);
   const [message, setMessage] = useState('');
@@ -25,14 +28,20 @@ function Login() {
   function loginAction(evt) {
     evt.preventDefault();
     const password = inputPasswordEl.current.value;
-    const foundKey = passwordStored(password);
-    if (foundKey) {
-      localStorage.setItem(CURRENT_USER_KEY, foundKey);
+    props.db.getAllUsers()
+    .then(querySnapshot => {
+      const users = [];
+      querySnapshot.forEach(function(doc) {
+        const userObject = Object.assign({}, doc.data(), {id: doc.id});
+        users.push(userObject);
+      });
+      const userFound = findUserMatch(password, users);
       saveMasterPassword(password);
+      localStorage.setItem(userFound.userKey, JSON.stringify(userFound));
+      localStorage.setItem(CURRENT_USER_KEY, userFound.userKey);
+      localStorage.setItem(USER_ID, userFound.id);
       window.location.href = DASHBOARD_PATH;
-    }else {
-      setMessage('Password not found');
-    }
+    });
   }
 
   return(
@@ -52,10 +61,8 @@ function Login() {
           </Form>
         </div>
       </div>
-      
-
     </div>
   )
 }
 
-export default Login;
+export default withFirebase(Login);
