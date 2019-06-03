@@ -75,7 +75,7 @@ export function addCredentialInfo(info) {
   return userInfo;
 }
 
-function createUserStorage(userKey) {
+export function createUserStorage(userKey) {
   const userName = generateUserNameFromHash(userKey);
   const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
 

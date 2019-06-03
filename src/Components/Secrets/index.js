@@ -45,7 +45,7 @@ function Secrets(props) {
     setTimeout(() => setFlag(false), 2000)
   }
   return(
-    <div className="page-secrets">
+    <div className="page page-secrets">
       <NavMain />
       <div className="page-inner">
         <div className="page-panel">
