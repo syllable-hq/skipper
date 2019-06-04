@@ -27,6 +27,7 @@
     "randomatic": "3.1.1",
     "react": "^16.8.1",
     "react-bootstrap": "1.0.0-beta.8",
+    "react-csv-reader": "1.2.2",
     "react-dom": "^16.8.1",
     "react-hot-loader": "^4.3.12",
     "react-lottie": "^1.2.3",

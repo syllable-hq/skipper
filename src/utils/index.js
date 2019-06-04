@@ -65,10 +65,10 @@ export function getCredentials(credentials) {
   });
 }
 
-export function addCredentialInfo(info) {
-  const cypherCredential = cypherObject(info)
+export function addCredentialInfo(credentials) {
+  const cypherCredentials = credentials.map(credential => cypherObject(credential));
   const userInfo = getUserInfo();
-  userInfo.credentials = [...userInfo.credentials, cypherCredential];
+  userInfo.credentials = [...userInfo.credentials, ...cypherCredentials];
   saveUserInfo(userInfo);
   return userInfo;
 }
@@ -178,4 +178,15 @@ export function buildURLParam(obj, prefix) {
     }
   }
   return str.join("&");
+}
+
+export function buildCredential(dataArray) {
+  return dataArray.map(credential => {
+   return {
+    website: credential[0],
+    primaryUser: credential[1],
+    secundaryUser: credential[2],
+    password: credential[3],
+   };
+  });
 }
