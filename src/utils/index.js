@@ -55,9 +55,7 @@ export function getCredentialAt(index) {
   return JSON.parse(decryptedCredential);
 }
 
-export function getCredentials() {
-  const userInfo = getUserInfo();
-  const credentials = userInfo.credentials;
+export function getCredentials(credentials) {
   const cookies = new Cookies();
   const masterPass = getMasterPassword();
   var simpleCrypto = new SimpleCrypto(masterPass);

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import CredentialRow from './CredentialRow';
+import useCredentialFetch from './useStateCredentials';
+import { withFirebase } from '../../Firebase';
 import {
-  getCredentials,
   userLogged,
   filterList,
   buildURLParam,
@@ -13,14 +14,17 @@ import {
 import { LOGIN_PATH } from '../../constants';
 import './index.scss';
 
-function Dashboard() {
+function Dashboard(props) {
   if (!userLogged()) {
     return window.location.href = LOGIN_PATH;
   }
-  const [credentials, _] = useState(
-    getCredentials()
-  );
-  const [display, setDisplay] = useState(credentials);
+
+  const credentials = useCredentialFetch(props);
+  const [display, setDisplay] = useState([]);
+
+  useEffect(() => {
+    setDisplay(credentials);
+  }, [credentials])
 
   function credentialRow(credential, i) {
     return <CredentialRow key={i} {...credential}
@@ -38,7 +42,6 @@ function Dashboard() {
     const filteredCredentials = query ? filterList(query, credentials) : credentials;
     setDisplay(filteredCredentials);
   }
-
   return(
     <div className="page dashboard">
       <NavMain activePage='home'/>
@@ -68,4 +71,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default withFirebase(Dashboard);
