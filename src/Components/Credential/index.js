@@ -29,11 +29,11 @@ function Credential(props) {
   }
 
   function addCredential() {
-    const userInfo = addCredentialInfo({website, password, primaryUser, secundaryUser});
+    const userInfo = addCredentialInfo([{website, password, primaryUser, secundaryUser}]);
     props.db.saveUserInfo(userInfo)
     .then(() => {
       window.location.href = DASHBOARD_PATH;
-    })
+    });
   }
 
   function changeWebsiteHandler(evt) {

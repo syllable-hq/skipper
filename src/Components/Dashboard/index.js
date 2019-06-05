@@ -5,10 +5,14 @@ import Table from 'react-bootstrap/Table';
 import CredentialRow from './CredentialRow';
 import useCredentialFetch from './useStateCredentials';
 import { withFirebase } from '../../Firebase';
+import CSVReader from 'react-csv-reader'
+
 import {
   userLogged,
   filterList,
   buildURLParam,
+  buildCredential,
+  addCredentialInfo,
 } from '../../utils';
 
 import { LOGIN_PATH } from '../../constants';
@@ -42,6 +46,15 @@ function Dashboard(props) {
     const filteredCredentials = query ? filterList(query, credentials) : credentials;
     setDisplay(filteredCredentials);
   }
+
+  function handleForce(data) {
+    const credentialsObject = buildCredential(data);
+    const userInfo = addCredentialInfo(credentialsObject);
+    props.db.saveUserInfo(userInfo)
+    .then(() => {
+      setDisplay([...credentials, ...credentialsObject])
+    })
+  }
   return(
     <div className="page dashboard">
       <NavMain activePage='home'/>
@@ -64,6 +77,12 @@ function Dashboard(props) {
             <a href="/credential">
               <button className="btn-add"><span>+</span></button>
             </a>
+
+            <CSVReader
+              label="Upload your passwords from a csv"
+              onFileLoaded={handleForce}
+              inputId="ObiWan"
+            />
 
           </div>
         </div>
