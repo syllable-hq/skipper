@@ -73,6 +73,15 @@ export function addCredentialInfo(credentials) {
   return userInfo;
 }
 
+export function removeCredential(indexRemoved) {
+  const userInfo = getUserInfo();
+  const credentials = userInfo.credentials;
+  const newArrayCredentials = [...credentials.slice(0, indexRemoved), ...credentials.slice(indexRemoved + 1)];
+  userInfo.credentials = newArrayCredentials;
+  saveUserInfo(userInfo);
+  return userInfo;
+}
+
 export function createUserStorage(userKey) {
   const userName = generateUserNameFromHash(userKey);
   const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
@@ -100,7 +109,8 @@ export function logout() {
 }
 
 export function userLogged() {
-  return !!localStorage.getItem(CURRENT_USER_KEY);
+  const cookies = new Cookies();
+  return !!cookies.get(COOKIE_MASTER_PASSWORD);
 }
 
 export function updateUserName(userName) {

@@ -13,6 +13,8 @@ import {
   buildURLParam,
   buildCredential,
   addCredentialInfo,
+  removeCredential,
+  getCredentials,
 } from '../../utils';
 
 import { LOGIN_PATH } from '../../constants';
@@ -31,7 +33,7 @@ function Dashboard(props) {
   }, [credentials])
 
   function credentialRow(credential, i) {
-    return <CredentialRow key={i} {...credential}
+    return <CredentialRow key={i} indexItem={i} {...credential} removeHandler={removeHandler}
       goToCredential={() => goToCredential(i)} />
   }
 
@@ -54,6 +56,14 @@ function Dashboard(props) {
     .then(() => {
       setDisplay([...credentials, ...credentialsObject])
     })
+  }
+
+  function removeHandler(indexItem) {
+    const userInfo = removeCredential(indexItem);
+    props.db.saveUserInfo(userInfo)
+    .then(() => {
+      setDisplay(getCredentials(userInfo.credentials));
+    });
   }
   return(
     <div className="page dashboard">
@@ -81,7 +91,7 @@ function Dashboard(props) {
             <CSVReader
               label="Upload your passwords from a csv"
               onFileLoaded={handleForce}
-              inputId="ObiWan"
+              inputId="password-reader"
             />
 
           </div>

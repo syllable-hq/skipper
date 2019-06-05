@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 
-
-function CredentialRow({website, primaryUser, secundaryUser, password, goToCredential}) {
+function CredentialRow({indexItem, website, primaryUser, secundaryUser, password, goToCredential, removeHandler}) {
   return(
-    <tr onClick={goToCredential}>
-      <td>
+    <tr>
+      <td onClick={goToCredential}>
         <ul>
           <li>URL: {website}</li>
           <li>username: {primaryUser}</li>
           <li>username2: {secundaryUser}</li>
           <li>password: {password}</li>
         </ul>
+      </td>
+      <td>
+        <Button variant="danger" size="sm" onClick={() => removeHandler(indexItem)}>Remove</Button>
       </td>
     </tr>
   );
