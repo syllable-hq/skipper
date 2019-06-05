@@ -7756,7 +7756,7 @@ react-context-toolbox@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-context-toolbox/-/react-context-toolbox-2.0.2.tgz#35637287cb23f801e6ed802c2bb7a97e1f04e3fb"
   integrity sha512-tY4j0imkYC3n5ZlYSgFkaw7fmlCp3IoQQ6DxpqeNHzcD0hf+6V+/HeJxviLUZ1Rv1Yn3N3xyO2EhkkZwHn0m1A==
 
-react-csv-reader@^1.2.2:
+react-csv-reader@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-csv-reader/-/react-csv-reader-1.2.2.tgz#f518e29e4c3f9205ed60cb560e1a371c3f8cae1a"
   integrity sha512-k4kpdEgJm6KiZ87yQTrB4gvlwsXgRZaSR/BZ0dAp+ry/EdlmJn983MTdWnR4htgx91RdjSFqEb75WDcW8OD11g==
