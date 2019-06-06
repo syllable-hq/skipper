@@ -5,7 +5,10 @@ import Table from 'react-bootstrap/Table';
 import CredentialRow from './CredentialRow';
 import useCredentialFetch from './useStateCredentials';
 import { withFirebase } from '../../Firebase';
-import CSVReader from 'react-csv-reader'
+import CSVReader from 'react-csv-reader';
+import Modal from 'react-bootstrap/Modal';
+import CredentialForm from '../Credential/form';
+import { CSVLink } from "react-csv";
 
 import {
   userLogged,
@@ -27,6 +30,8 @@ function Dashboard(props) {
 
   const credentials = useCredentialFetch(props);
   const [display, setDisplay] = useState([]);
+
+  const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
 
   useEffect(() => {
     setDisplay(credentials);
@@ -94,6 +99,13 @@ function Dashboard(props) {
               inputId="password-reader"
             />
 
+            <CSVLink data={csvData}>Export Credentials</CSVLink>
+
+            <Modal show={showEditModal} onHide={hideHandler}>
+              <Modal.Body>
+                <CredentialForm {...credential} updateHandler={updateHandler}  />
+              </Modal.Body>
+            </Modal>
           </div>
         </div>
     </div>
