@@ -4,11 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import { withFirebase } from '../../Firebase';
+import Alert from 'react-bootstrap/Alert';
 
 import {
   RANDOMIZE_PATTERN,
   RANDOMIZE_LENGTH,
   DASHBOARD_PATH,
+  PASSWORD_LENGTH,
 } from '../../constants';
 import { addCredentialInfo } from '../../utils';
 
@@ -22,6 +24,7 @@ function Credential(props) {
   const [website, setWebsite] = useState('');
   const [primaryUser, setPrimaryUser] = useState('');
   const [secundaryUser, setSecundaryUser] = useState('');
+  const [message, setMessage] = useState('');
 
   function generatePassword() {
     const newPassword = randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH);
@@ -29,6 +32,10 @@ function Credential(props) {
   }
 
   function addCredential() {
+    if(password.length < PASSWORD_LENGTH) {
+      setMessage(`Password is to short! At least ${PASSWORD_LENGTH} character required`);
+      return;
+    }
     const userInfo = addCredentialInfo([{website, password, primaryUser, secundaryUser}]);
     props.db.saveUserInfo(userInfo)
     .then(() => {
@@ -36,16 +43,20 @@ function Credential(props) {
     });
   }
 
-  function changeWebsiteHandler(evt) {
-    setWebsite(evt.target.value);
+  function changeWebsiteHandler(event) {
+    setWebsite(event.target.value);
   }
 
-  function changePrimaryHandler(evt) {
-    setPrimaryUser(evt.target.value);
+  function changePrimaryHandler(event) {
+    setPrimaryUser(event.target.value);
   }
 
-  function changeSecundaryHandler(evt) {
-    setSecundaryUser(evt.target.value);
+  function changeSecundaryHandler(event) {
+    setSecundaryUser(event.target.value);
+  }
+
+  function changePasswordHandler(event) {
+    setPassword(event.target.value);
   }
   
   return(
@@ -56,6 +67,9 @@ function Credential(props) {
           <h1>CREATE</h1>
 
           <span>Create a new secret:</span>
+
+          { message && <Alert variant='warning'> {message} </Alert> }
+
           <Form.Group className="form-group">
             <Form.Label>URL:</Form.Label>
             <Form.Control type="text" value={website} onChange={changeWebsiteHandler} placeholder="http://www.website.com"/>
@@ -67,7 +81,7 @@ function Credential(props) {
             <Form.Control type="text" value={secundaryUser} onChange={changeSecundaryHandler} />
 
             <Form.Label>Secret:</Form.Label>
-            <Form.Control type="text" value={password} placeholder="***********" readOnly={true}/>
+            <Form.Control type="text"  onChange={changePasswordHandler}  value={password} placeholder="***********" />
 
             <Button onClick={generatePassword} className="generate-button" variant="secondary">Generate</Button>
           </Form.Group>
