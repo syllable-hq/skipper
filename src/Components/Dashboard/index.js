@@ -8,6 +8,7 @@ import { withFirebase } from '../../Firebase';
 import CSVReader from 'react-csv-reader';
 import Modal from 'react-bootstrap/Modal';
 import CredentialForm from '../Credential/form';
+import { CSVLink } from "react-csv";
 
 import {
   userLogged,
@@ -33,6 +34,8 @@ function Dashboard(props) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [credential, setCredential] = useState({});
   const [indexToUpdate, setIndexToUpdate] = useState(null);
+
+  const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
 
   useEffect(() => {
     setDisplay(credentials);
@@ -123,7 +126,7 @@ function Dashboard(props) {
               onFileLoaded={handleForce}
               inputId="password-reader"
             />
-
+            <CSVLink data={csvData}>Export Credentials</CSVLink>
             <Modal show={showEditModal} onHide={hideHandler}>
               <Modal.Body>
                 <CredentialForm {...credential} updateHandler={updateHandler}  />
