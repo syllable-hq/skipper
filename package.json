@@ -3,23 +3,39 @@
   "version": "1.0.2",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.4.1"
+  },
   "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "bundle": "react-static bundle",
-    "export": "react-static export",
+    "start": "dotenv react-static start",
+    "stage": "dotenv react-static build --staging",
+    "build": "dotenv react-static build",
+    "bundle": "dotenv react-static bundle",
+    "export": "dotenv react-static export",
     "serve": "serve dist -p 3000 -s"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
+    "bcryptjs": "2.4.3",
+    "bootstrap": "4.3.1",
+    "clipboard-copy": "3.0.0",
+    "dotenv": "8.0.0",
+    "firebase": "6.1.0",
+    "phonetic": "0.1.1",
+    "randomatic": "3.1.1",
     "react": "^16.8.1",
+    "react-bootstrap": "1.0.0-beta.8",
+    "react-csv": "^1.1.1",
+    "react-csv-reader": "1.2.2",
     "react-dom": "^16.8.1",
     "react-hot-loader": "^4.3.12",
     "react-lottie": "^1.2.3",
     "react-static": "^6.0.18",
-    "react-static-plugin-sass": "^6.3.0"
+    "react-static-plugin-sass": "6.3.0",
+    "simple-crypto-js": "2.0.2",
+    "universal-cookie": "4.0.0"
   },
   "devDependencies": {
     "eslint-config-react-tools": "1.x.x",

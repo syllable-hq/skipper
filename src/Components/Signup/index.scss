@@ -1,0 +1,36 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.page-home {
+  .info {
+    color: $color-link!important;
+    font-size: 1rem;
+  }
+
+  .generate-button {
+    float: left;
+  }
+
+  .copy-button {
+    float: right;
+  }
+
+  .divider {
+    margin: 4rem 0;
+    padding-top: 4rem;
+  }
+
+  .page-panel {
+    position: relative;
+  }
+
+  .hidden-preloaders {
+    position: absolute;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+  .next-button {
+    float: right;
+  }
+}
