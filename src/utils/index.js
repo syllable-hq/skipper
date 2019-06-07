@@ -73,6 +73,14 @@ export function addCredentialInfo(credentials) {
   return userInfo;
 }
 
+export function setCredentials(credentials) {
+  const cypherCredentials = credentials.map(credential => cypherObject(credential));
+  const userInfo = getUserInfo();
+  userInfo.credentials = [...cypherCredentials];
+  saveUserInfo(userInfo);
+  return userInfo;
+}
+
 export function removeCredential(indexRemoved) {
   const userInfo = getUserInfo();
   const credentials = userInfo.credentials;

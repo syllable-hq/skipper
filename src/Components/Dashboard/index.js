@@ -18,6 +18,7 @@ import {
   addCredentialInfo,
   removeCredential,
   getCredentials,
+  setCredentials,
 } from '../../utils';
 
 import { LOGIN_PATH } from '../../constants';
@@ -30,6 +31,9 @@ function Dashboard(props) {
 
   const credentials = useCredentialFetch(props);
   const [display, setDisplay] = useState([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [credential, setCredential] = useState({});
+  const [indexToUpdate, setIndexToUpdate] = useState(null);
 
   const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
 
@@ -38,7 +42,8 @@ function Dashboard(props) {
   }, [credentials])
 
   function credentialRow(credential, i) {
-    return <CredentialRow key={i} indexItem={i} {...credential} removeHandler={removeHandler}
+    return <CredentialRow key={i} indexItem={i} {...credential}
+      removeHandler={removeHandler} editHandler={editHandler}
       goToCredential={() => goToCredential(i)} />
   }
 
@@ -60,7 +65,7 @@ function Dashboard(props) {
     props.db.saveUserInfo(userInfo)
     .then(() => {
       setDisplay([...credentials, ...credentialsObject])
-    })
+    });
   }
 
   function removeHandler(indexItem) {
@@ -70,6 +75,29 @@ function Dashboard(props) {
       setDisplay(getCredentials(userInfo.credentials));
     });
   }
+
+  function editHandler(indexItem) {
+    const credential =  credentials[indexItem];
+    setIndexToUpdate(indexItem);
+    setCredential(credential);
+    setShowEditModal(!showEditModal);
+  }
+
+  function hideHandler() {
+    setShowEditModal(false);
+  }
+
+  function updateHandler(data) {
+    const updateCredential = Object.assign({}, credential, data);
+    credentials.splice(indexToUpdate, 1, updateCredential);
+    hideHandler();
+    const userInfo = setCredentials(credentials);
+    props.db.saveUserInfo(userInfo)
+    .then(() => {
+      setDisplay([...credentials])
+    });
+  }
+
   return(
     <div className="page dashboard">
       <NavMain activePage='home'/>
@@ -98,9 +126,7 @@ function Dashboard(props) {
               onFileLoaded={handleForce}
               inputId="password-reader"
             />
-
             <CSVLink data={csvData}>Export Credentials</CSVLink>
-
             <Modal show={showEditModal} onHide={hideHandler}>
               <Modal.Body>
                 <CredentialForm {...credential} updateHandler={updateHandler}  />
