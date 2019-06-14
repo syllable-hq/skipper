@@ -9,7 +9,6 @@
 html,
 body {
   font-size: $font-size-base;
-  background: $color-sky-top;
 }
 
 body {
@@ -24,7 +23,6 @@ body {
     letter-spacing: $letter-spacing;
     line-height: $line-height;
     font-size: $font-size-sm;
-    background: $color-primary;
   }
 }
 
@@ -35,6 +33,10 @@ body {
   color: $color-primary;
   margin: 0 auto;
   height: 100vh;
+}
+
+.centered {
+  text-align: center;
 }
 
 a {
@@ -50,8 +52,15 @@ button {
   border: none;
 }
 
+h1 {
+  display: block;
+  text-align: center;
+  padding: 4rem 0;
+}
 
 .page-inner {
+  max-width: $maxWidth;
+  margin: 0 auto;
   box-sizing: border-box;
   height: 100vh;
   // offset for the nav-sides
@@ -139,4 +148,8 @@ button {
   svg {
     @include center-both();
   }
+}
+
+.dashboard-link {
+  color: white;
 }

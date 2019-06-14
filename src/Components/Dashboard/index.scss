@@ -1,0 +1,28 @@
+.dashboard {
+  .page-panel {
+    position: relative;
+  }
+
+  td {
+    padding: 10px 5px;
+  }
+
+  tr {
+    cursor: pointer;
+  }
+
+  .btn-add{
+    float: right;
+    text-decoration: none;
+    color: white;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: grey;
+    align-content: center;
+    span {
+      font-size: 4rem;
+      vertical-align: middle;
+    }
+  }
+}
