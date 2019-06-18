@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import { withFirebase } from '../../Firebase';
 import Alert from 'react-bootstrap/Alert';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 
 import {
   RANDOMIZE_PATTERN,
@@ -58,9 +59,10 @@ function Credential(props) {
   function changePasswordHandler(event) {
     setPassword(event.target.value);
   }
-  
+
   return(
-    <div className="page page-credential">
+    <InBrowserOnly>
+      <div className="page page-credential">
       <NavMain activePage='home'/>
       <div className="page-inner">
         <div className="page-panel">
@@ -92,9 +94,10 @@ function Credential(props) {
             </a>
             <Button onClick={addCredential} className="save-button" variant="secondary">Save</Button>
           </Form.Group>
-        </div>  
+        </div>
       </div>
     </div>
+    </InBrowserOnly>
   )
 }
 

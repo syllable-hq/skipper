@@ -17,6 +17,7 @@ import {
   USER_ID,
 } from '../../constants';
 import './index.scss';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 
 function Login(props) {
   logout();
@@ -48,7 +49,8 @@ function Login(props) {
   }
 
   return(
-    <div className="page page-login">
+    <InBrowserOnly>
+      <div className="page page-login">
       <NavMain />
       <div className="page-inner">
         <div className="page-panel">
@@ -65,6 +67,7 @@ function Login(props) {
         </div>
       </div>
     </div>
+    </InBrowserOnly>
   )
 }
 

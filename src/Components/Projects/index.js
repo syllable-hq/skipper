@@ -1,4 +1,5 @@
 import React from 'react';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 import NavMain from '../NavMain';
 import NavSide from '../NavSide';
 import ProjectSummary from '../ProjectSummary';
@@ -107,7 +108,8 @@ class Projects extends React.Component {
     const link = project.link || project.linkPortfolio;
 
     return (
-      <div className="page page-projects side-arrows">
+      <InBrowserOnly>
+        <div className="page page-projects side-arrows">
         <NavMain activePage='projects'/>
 
         <div className="page-inner">
@@ -138,6 +140,7 @@ class Projects extends React.Component {
 
         <NavSide />
       </div>
+      </InBrowserOnly>
     );
   }
 }

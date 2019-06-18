@@ -1,5 +1,6 @@
 import React from 'react';
 import { userLogged } from '../../utils';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 
 function Home() {
 
@@ -10,9 +11,11 @@ function Home() {
   }
 
   return(
-    <div>
-      ...
-    </div>
+    <InBrowserOnly>
+      <div>
+        ...
+      </div>
+    </InBrowserOnly>
   );
 }
 

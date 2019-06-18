@@ -6,6 +6,7 @@ import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
 import Alert from 'react-bootstrap/Alert';
 import { withFirebase } from '../../Firebase';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 
 import {
   saveMasterPassword,
@@ -13,7 +14,7 @@ import {
   cypherMasterPassword,
   createUserStorage,
  } from '../../utils';
-import { 
+import {
   RANDOMIZE_PATTERN,
   RANDOMIZE_LENGTH,
   SIGNUP_CONFIRMATION_PATH,
@@ -78,7 +79,8 @@ function Signup(props) {
   }
 
   return (
-    <div className="page page-home">
+    <InBrowserOnly>
+      <div className="page page-home">
       <NavMain activePage='home'/>
       <div className="page-inner">
         <div className="page-panel">
@@ -113,6 +115,7 @@ function Signup(props) {
         </div>
       </div>
     </div>
+    </InBrowserOnly>
   );
 }
 

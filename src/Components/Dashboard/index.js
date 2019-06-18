@@ -9,6 +9,7 @@ import CSVReader from 'react-csv-reader';
 import Modal from 'react-bootstrap/Modal';
 import CredentialForm from '../Credential/form';
 import { CSVLink } from "react-csv";
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 
 import {
   userLogged,
@@ -99,7 +100,8 @@ function Dashboard(props) {
   }
 
   return(
-    <div className="page dashboard">
+    <InBrowserOnly>
+      <div className="page dashboard">
       <NavMain activePage='home'/>
         <div className="page-inner">
           <div className="page-panel">
@@ -135,6 +137,7 @@ function Dashboard(props) {
           </div>
         </div>
     </div>
+    </InBrowserOnly>
   );
 }
 

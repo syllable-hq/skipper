@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { InBrowserOnly } from '../../utils/InBrowserOnly';
 import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';
@@ -18,7 +19,8 @@ function SingupConfirmation() {
   }
 
   return(
-    <div className="page signup-confirmation">
+    <InBrowserOnly>
+      <div className="page signup-confirmation">
       <NavMain activePage='home'/>
       <div className="page-inner">
         <div className="page-panel">
@@ -52,6 +54,7 @@ function SingupConfirmation() {
         </div>
       </div>
     </div>
+    </InBrowserOnly>
   );
 }
 
