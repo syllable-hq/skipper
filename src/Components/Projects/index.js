@@ -110,36 +110,36 @@ class Projects extends React.Component {
     return (
       <InBrowserOnly>
         <div className="page page-projects side-arrows">
-        <NavMain activePage='projects'/>
+          <NavMain activePage='projects'/>
 
-        <div className="page-inner">
-          <div className="projects__nav arrow-prev">
-            <button className="icon-arrow-up" onClick={this.handleClickPrev}></button>
-          </div>
-
-          <section className="two-col-panel scroll portfolio-panel portfolio-summary-section">
-            <div className="portfolio-summary">
-              { // todo
-                projects.map((project, idx) => {
-                  return <ProjectSummary project={project} key={idx} isCurrentProject={this.state.currentProjectIdx === idx} />
-                })
-              }
+          <div className="page-inner">
+            <div className="projects__nav arrow-prev">
+              <button className="icon-arrow-up" onClick={this.handleClickPrev}></button>
             </div>
-          </section>
 
-          <section className="two-col-panel portfolio-panel">
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <PortfolioImage project={project} currentProjectIdx={this.state.currentProjectIdx} />
-            </a>
-          </section>
+            <section className="two-col-panel scroll portfolio-panel portfolio-summary-section">
+              <div className="portfolio-summary">
+                { // todo
+                  projects.map((project, idx) => {
+                    return <ProjectSummary project={project} key={idx} isCurrentProject={this.state.currentProjectIdx === idx} />
+                  })
+                }
+              </div>
+            </section>
 
-          <div className="projects__nav arrow-next">
-            <button className="icon-arrow-up" onClick={this.handleClickNext}></button>
+            <section className="two-col-panel portfolio-panel">
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <PortfolioImage project={project} currentProjectIdx={this.state.currentProjectIdx} />
+              </a>
+            </section>
+
+            <div className="projects__nav arrow-next">
+              <button className="icon-arrow-up" onClick={this.handleClickNext}></button>
+            </div>
           </div>
-        </div>
 
-        <NavSide />
-      </div>
+          <NavSide />
+        </div>
       </InBrowserOnly>
     );
   }
