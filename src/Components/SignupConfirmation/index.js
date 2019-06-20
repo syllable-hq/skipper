@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 import NavMain from '../NavMain';
 import './index.scss';
 import Form from 'react-bootstrap/Form';

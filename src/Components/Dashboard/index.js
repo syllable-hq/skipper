@@ -9,7 +9,7 @@ import CSVReader from 'react-csv-reader';
 import Modal from 'react-bootstrap/Modal';
 import CredentialForm from '../Credential/form';
 import { CSVLink } from "react-csv";
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 
 import {
   userLogged,
@@ -25,120 +25,135 @@ import {
 import { LOGIN_PATH } from '../../constants';
 import './index.scss';
 
-function Dashboard(props) {
-  if (!userLogged()) {
-    return window.location.href = LOGIN_PATH;
+// Moved these outside the class to fix this error,
+// https://reactjs.org/docs/error-decoder.html/?invariant=307
+// for now... will probably break
+// on the front end?
+const credentials = useCredentialFetch(props);
+const [display, setDisplay] = useState([]);
+const [showEditModal, setShowEditModal] = useState(false);
+const [credential, setCredential] = useState({});
+const [indexToUpdate, setIndexToUpdate] = useState(null);
+
+class Dashboard extends React.Component {
+
+  constructor(props) {
+    super(props);
   }
 
-  const credentials = useCredentialFetch(props);
-  const [display, setDisplay] = useState([]);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [credential, setCredential] = useState({});
-  const [indexToUpdate, setIndexToUpdate] = useState(null);
-
-  const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
-
-  useEffect(() => {
-    setDisplay(credentials);
-  }, [credentials])
-
-  function credentialRow(credential, i) {
+  credentialRow(credential, i) {
     return <CredentialRow key={i} indexItem={i} {...credential}
       removeHandler={removeHandler} editHandler={editHandler}
       goToCredential={() => goToCredential(i)} />
   }
 
-  function goToCredential(itemIndex) {
+  goToCredential(itemIndex) {
     const credential = credentials[itemIndex];
     delete credential.password;
     window.location.href = `/secrets/${itemIndex}?${buildURLParam(credential)}`;
   }
 
-  function searchHandler(evt) {
+  searchHandler(evt) {
     const query = evt.target.value;
     const filteredCredentials = query ? filterList(query, credentials) : credentials;
     setDisplay(filteredCredentials);
   }
 
-  function handleForce(data) {
+  handleForce(data) {
     const credentialsObject = buildCredential(data);
     const userInfo = addCredentialInfo(credentialsObject);
-    props.db.saveUserInfo(userInfo)
+    this.props.db.saveUserInfo(userInfo)
     .then(() => {
       setDisplay([...credentials, ...credentialsObject])
     });
   }
 
-  function removeHandler(indexItem) {
+  removeHandler(indexItem) {
     const userInfo = removeCredential(indexItem);
-    props.db.saveUserInfo(userInfo)
+    this.props.db.saveUserInfo(userInfo)
     .then(() => {
       setDisplay(getCredentials(userInfo.credentials));
     });
   }
 
-  function editHandler(indexItem) {
+  editHandler(indexItem) {
     const credential =  credentials[indexItem];
     setIndexToUpdate(indexItem);
     setCredential(credential);
     setShowEditModal(!showEditModal);
   }
 
-  function hideHandler() {
+  hideHandler() {
     setShowEditModal(false);
   }
 
-  function updateHandler(data) {
+  updateHandler(data) {
     const updateCredential = Object.assign({}, credential, data);
     credentials.splice(indexToUpdate, 1, updateCredential);
     hideHandler();
     const userInfo = setCredentials(credentials);
-    props.db.saveUserInfo(userInfo)
+    this.props.db.saveUserInfo(userInfo)
     .then(() => {
       setDisplay([...credentials])
     });
   }
 
-  return(
-    <InBrowserOnly>
-      <div className="page dashboard">
-      <NavMain activePage='home'/>
-        <div className="page-inner">
-          <div className="page-panel">
-            <h1>DASHBOARD</h1>
+  componentDidMount() {
+    if (!userLogged()) {
+      return window.location.href = LOGIN_PATH;
+    }
+  }
 
-            <Form.Group>
-              <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
-            </Form.Group>
+  render() {
+    const { props } = this.props;
 
-            <span>Recent Searches</span>
+    const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
 
-            <Table striped>
-              <tbody>
-                { display.map(credentialRow) }
-              </tbody>
-            </Table>
+    useEffect(() => {
+      setDisplay(credentials);
+    }, [credentials])
 
-            <a href="/credential">
-              <button className="btn-add"><span>+</span></button>
-            </a>
+    return(
+      <InBrowserOnly>
+        <div className="page dashboard">
+          <NavMain activePage='home'/>
+            <div className="page-inner">
+              <div className="page-panel">
+                <h1>DASHBOARD</h1>
 
-            <CSVReader
-              label="Upload your passwords from a csv"
-              onFileLoaded={handleForce}
-              inputId="password-reader"
-            />
-            <CSVLink data={csvData}>Export Credentials</CSVLink>
-            <Modal show={showEditModal} onHide={hideHandler}>
-              <Modal.Body>
-                <CredentialForm {...credential} updateHandler={updateHandler}  />
-              </Modal.Body>
-            </Modal>
-          </div>
+                <Form.Group>
+                  <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
+                </Form.Group>
+
+                <span>Recent Searches</span>
+
+                <Table striped>
+                  <tbody>
+                    { display.map(credentialRow) }
+                  </tbody>
+                </Table>
+
+                <a href="/credential">
+                  <button className="btn-add"><span>+</span></button>
+                </a>
+
+                <CSVReader
+                  label="Upload your passwords from a csv"
+                  onFileLoaded={handleForce}
+                  inputId="password-reader"
+                />
+                <CSVLink data={csvData}>Export Credentials</CSVLink>
+                <Modal show={showEditModal} onHide={hideHandler}>
+                  <Modal.Body>
+                    <CredentialForm {...credential} updateHandler={updateHandler}  />
+                  </Modal.Body>
+                </Modal>
+              </div>
+            </div>
         </div>
-    </div>
-    </InBrowserOnly>
-  );
+      </InBrowserOnly>
+    );
+  }
 }
 
 export default withFirebase(Dashboard);

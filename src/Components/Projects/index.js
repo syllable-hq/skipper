@@ -1,5 +1,5 @@
 import React from 'react';
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 import NavMain from '../NavMain';
 import NavSide from '../NavSide';
 import ProjectSummary from '../ProjectSummary';

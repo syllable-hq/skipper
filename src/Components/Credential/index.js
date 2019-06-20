@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import randomize from 'randomatic';
 import { withFirebase } from '../../Firebase';
 import Alert from 'react-bootstrap/Alert';
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 
 import {
   RANDOMIZE_PATTERN,

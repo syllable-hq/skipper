@@ -1,3 +1,5 @@
+import React from 'react';
+
 class InBrowserOnly extends React.Component {
   state = { mounted: false }
   componentDidMount() { this.setState({ mounted: true }) }
@@ -6,3 +8,5 @@ class InBrowserOnly extends React.Component {
     return this.props.children;
   }
 }
+
+export default InBrowserOnly;

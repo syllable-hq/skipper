@@ -1,22 +1,27 @@
 import React from 'react';
 import { userLogged } from '../../utils';
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 
-function Home() {
 
-  if (userLogged()) {
-    window.location.href = '/dashboard';
-  } else {
-    window.location.href = '/login';
+class Home extends React.Component {
+
+  componentDidMount() {
+    if (userLogged()) {
+      window.location.href = '/dashboard';
+    } else {
+      window.location.href = '/login';
+    }
   }
 
-  return(
-    <InBrowserOnly>
-      <div>
-        ...
-      </div>
-    </InBrowserOnly>
-  );
+  render() {
+    return(
+      <InBrowserOnly>
+        <div>
+          ...
+        </div>
+      </InBrowserOnly>
+    );
+  }
 }
 
 export default Home;

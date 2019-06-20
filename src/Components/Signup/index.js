@@ -6,7 +6,7 @@ import randomize from 'randomatic';
 import copyClipboard from 'clipboard-copy';
 import Alert from 'react-bootstrap/Alert';
 import { withFirebase } from '../../Firebase';
-import { InBrowserOnly } from '../../utils/InBrowserOnly';
+import InBrowserOnly from '../InBrowserOnly';
 
 import {
   saveMasterPassword,
