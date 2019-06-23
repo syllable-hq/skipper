@@ -17,7 +17,6 @@ import { addCredentialInfo } from '../../utils';
 import './index.scss';
 
 function Credential(props) {
-
   const [password, setPassword] = useState(
     randomize(RANDOMIZE_PATTERN, RANDOMIZE_LENGTH)
   );
@@ -58,7 +57,7 @@ function Credential(props) {
   function changePasswordHandler(event) {
     setPassword(event.target.value);
   }
-  
+
   return(
     <div className="page page-credential">
       <NavMain activePage='home'/>
@@ -92,7 +91,7 @@ function Credential(props) {
             </a>
             <Button onClick={addCredential} className="save-button" variant="secondary">Save</Button>
           </Form.Group>
-        </div>  
+        </div>
       </div>
     </div>
   )
