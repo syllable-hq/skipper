@@ -1,7 +1,16 @@
-import SimpleCrypto from "simple-crypto-js";
+import SimpleCrypto from 'simple-crypto-js';
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
 import bcrypt from 'bcryptjs';
+
+let storage;
+
+if (typeof window === 'undefined') {
+  require('localstorage-polyfill');
+  storage = global.localStorage;
+} else {
+  storage = window.localStorage;
+}
 
 import {
   USER_KEY,
@@ -29,19 +38,24 @@ function cypherObject(object) {
   const masterPass = getMasterPassword();
   var simpleCrypto = new SimpleCrypto(masterPass);
   if (typeof object === 'object') {
-    const object = JSON.stringify(object);  
+    const object = JSON.stringify(object);
   }
   return simpleCrypto.encrypt(object);
 }
 
 export function getUserInfo() {
-  const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
-  const userInfo = localStorage.getItem(currentUserKey);
+  const currentUserKey = storage.getItem(CURRENT_USER_KEY);
+  const userInfo = storage.getItem(currentUserKey);
   return JSON.parse(userInfo);
 }
 
 export function getUserName() {
   let userInfo = getUserInfo();
+
+  if (!userInfo) {
+    return null;
+  }
+
   const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
   return simpleCrypto.decrypt(userInfo.userName);
 }
@@ -99,19 +113,19 @@ export function createUserStorage(userKey) {
     credentials: [],
     userName: simpleCrypto.encrypt(userName),
   };
-  
-  localStorage.setItem(userKey, JSON.stringify(userInfo));
-  localStorage.setItem(CURRENT_USER_KEY, userKey);
+
+  storage.setItem(userKey, JSON.stringify(userInfo));
+  storage.setItem(CURRENT_USER_KEY, userKey);
   return userInfo;
 }
 
 function generateUserNameFromHash() {
- return phonetic.generate({ seed: localStorage.getItem(USER_KEY) });
+ return phonetic.generate({ seed: storage.getItem(USER_KEY) });
 }
 
 export function logout() {
-  // localStorage.removeItem(CURRENT_USER_KEY);
-  localStorage.clear();
+  // storage.removeItem(CURRENT_USER_KEY);
+  storage.clear();
   const cookies = new Cookies();
   cookies.remove(COOKIE_MASTER_PASSWORD);
 }
@@ -129,8 +143,8 @@ export function updateUserName(userName) {
 }
 
 function saveUserInfo(userInfo) {
-  const currentUserKey = localStorage.getItem(CURRENT_USER_KEY);
-  localStorage.setItem(currentUserKey, JSON.stringify(userInfo))
+  const currentUserKey = storage.getItem(CURRENT_USER_KEY);
+  storage.setItem(currentUserKey, JSON.stringify(userInfo))
 }
 
 export function filterList(q, list) {
