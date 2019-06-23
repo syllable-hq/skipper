@@ -6,9 +6,11 @@ import bcrypt from 'bcryptjs';
 let storage;
 
 if (typeof window === 'undefined') {
+  console.log('is node')
   require('localstorage-polyfill');
   storage = global.localStorage;
 } else {
+  console.log('is window')
   storage = window.localStorage;
 }
 

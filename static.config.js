@@ -2,16 +2,16 @@ import React from 'react';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const siteRoot = 'https://www.syllablehq.com';
+const siteRoot = 'https://syllable-skipper.netlify.com/';
 const stagingSiteRoot = 'http://localhost:3000';
 
 // static.config.js
 export default {
   getSiteData: () => ({
-    title: 'Syllable Technology + Design',
+    title: 'Skipper',
     siteRoot: siteRoot,
-    description: 'Syllable is a technology and design studio in Brooklyn, New York. We build technology for mission-driven partners like nonprofits, cultural institutions, and startups advancing emerging technology.',
-    imageUrl: `${siteRoot}/syllable-logo.png`,
+    description: 'Skipper is a dead simple password manager',
+    imageUrl: `${siteRoot}/skipper_logo.png`,
     type: 'website',
   }),
   getData: resolvedRoute => {
