@@ -6,12 +6,14 @@ import './app.scss'
 
 function App() {
   return (
-    <Root>
-      <Routes />
-      <Router>
-        <Secrets path="/secrets/:id" />
-      </Router>
-    </Root>
+    <React.Suspense fallback={<span>Loading...</span>}>
+      <Root>
+        <Routes />
+        <Router>
+          <Secrets path="/secrets/:id" />
+        </Router>
+      </Root>
+    </React.Suspense>
   )
 }
 
