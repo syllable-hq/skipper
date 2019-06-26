@@ -33,7 +33,7 @@
     "react-dom": "^16.8.2",
     "react-hot-loader": "^4.11.1",
     "react-static": "^7.0.0",
-    "react-static-plugin-sass": "6.3.0",
+    "react-static-plugin-sass": "7.1.0",
     "react-static-plugin-sitemap": "^7.0.0",
     "react-static-plugin-source-filesystem": "^7.0.0",
     "simple-crypto-js": "2.0.2",

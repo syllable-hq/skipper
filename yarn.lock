@@ -2788,7 +2788,7 @@ css-declaration-sorter@^4.0.1:
     postcss "^7.0.1"
     timsort "^0.3.0"
 
-css-loader@^2.0.1:
+css-loader@^2.0.1, css-loader@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-2.1.1.tgz#d8254f72e412bb2238bb44dd674ffbef497333ea"
   integrity sha512-OcKJU/lt232vl1P9EEDamhoO9iKY3tIjY5GU+XDLblAykTdgs6Ux9P1hTHve8nFKy5KPpOXOsVI/hIwi3841+w==
@@ -3933,17 +3933,6 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
-
-extract-css-chunks-webpack-plugin@^3.2.1:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/extract-css-chunks-webpack-plugin/-/extract-css-chunks-webpack-plugin-3.3.3.tgz#d550be32b93dad5d290e9d979d37dd317bdaec9b"
-  integrity sha512-4DYo3jna9ov81rdKtE1U2cirb3ERoWhHldzRxZWx3Q5i5Dm6U+mmfon7PmaKDuh6+xySVOqtlXrZyJY2V4tc+g==
-  dependencies:
-    loader-utils "^1.1.0"
-    lodash "^4.17.11"
-    normalize-url "^3.3.0"
-    schema-utils "^1.0.0"
-    webpack-sources "^1.1.0"
 
 extract-css-chunks-webpack-plugin@^4.5.1:
   version "4.5.2"
@@ -6264,7 +6253,7 @@ normalize-url@1.9.1:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-normalize-url@^3.0.0, normalize-url@^3.3.0:
+normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
@@ -7633,14 +7622,18 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-static-plugin-sass@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-static-plugin-sass/-/react-static-plugin-sass-6.3.0.tgz#37d9f56e0a5b820407106025486a8f4ed3a115ef"
-  integrity sha512-U9aOdt3XcJw4HTJXGnV/BkEuR7VAJDbyBsEWvS74hAvvgprNidrDUL5Wo3l7fFzff0ZPKqXbZm67x5pSoUoLEg==
+react-static-plugin-sass@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-sass/-/react-static-plugin-sass-7.1.0.tgz#4e19d51fc65ac91b93ba561033b73e7e2b2574ff"
+  integrity sha512-xQgO/LxvQq0q7OkCKCigX+6MlouLJcQZnb2s9YrZMQ6WOdPwXOQACjODHaW/YbUx0YkC+9xih1gmB8kH6Sm8Nw==
   dependencies:
-    extract-css-chunks-webpack-plugin "^3.2.1"
+    autoprefixer "^9.5.1"
+    css-loader "^2.1.0"
+    extract-css-chunks-webpack-plugin "^4.5.1"
     node-sass "^4.11.0"
+    postcss-flexbugs-fixes "^4.1.0"
     sass-loader "^7.1.0"
+    semver "^6.0.0"
 
 react-static-plugin-sitemap@^7.0.0:
   version "7.0.10"
@@ -8208,6 +8201,11 @@ semver@^5.3.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
+
+semver@^6.0.0:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.2.tgz#079960381376a3db62eb2edc8a3bfb10c7cfe318"
+  integrity sha512-z4PqiCpomGtWj8633oeAdXm1Kn1W++3T8epkZYnwiVgIYIJ0QHszhInYSJTYxebByQH7KVCEAn8R9duzZW2PhQ==
 
 semver@^6.1.1:
   version "6.1.1"
