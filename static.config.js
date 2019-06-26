@@ -21,7 +21,9 @@ export default {
     imageUrl: `${siteRoot}/skipper_logo.png`,
     type: 'website',
   }),
-  plugins: ["react-static-plugin-sass"],
+  plugins: [
+    "react-static-plugin-sass",
+  ],
   siteRoot: siteRoot,
   stagingSiteRoot: stagingSiteRoot,
   getRoutes: async ({ dev }) => [
