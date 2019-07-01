@@ -7,15 +7,24 @@ Please see the [React-Static](https://github.com/nozzle/react-static) documentat
 
 -----
 
+## Dependencies
+See package.json for versions
+- [Node](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/en/)
+
+
 ## Development
-To run in development, run:
+To run in development:
 ```
+# install packages with yarn
+yarn
+# run the start script which uses react-static
 yarn start
 ```
 
 
 ## Production
-To build for production, run:
+To build for production:
 ```
 yarn build
 ```
