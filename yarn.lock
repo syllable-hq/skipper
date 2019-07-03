@@ -1013,7 +1013,7 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@reach/router@^1.2.1":
+"@reach/router@1.2.1", "@reach/router@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"
   integrity sha512-kTaX08X4g27tzIFQGRukaHmNbtMYDS3LEWIS8+l6OayGIw6Oyo1HIF/JzeuR2FoF9z6oV+x/wJSVSq4v8tcUGQ==
@@ -7621,6 +7621,11 @@ react-side-effect@^1.1.0:
   dependencies:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
+
+react-static-plugin-reach-router@7.0.10:
+  version "7.0.10"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-reach-router/-/react-static-plugin-reach-router-7.0.10.tgz#0ebd8b914bbd4e3e4ca2b355ba6f837e9c6821a4"
+  integrity sha512-EJBflq0t6c8ldiakLyRqaht8hXx4FFc+zKrsoeHnBWzSq9SfmDjC9tdEKSC8twkqC7ypY4QmqWAiQsF3U15/Cw==
 
 react-static-plugin-sass@7.1.0:
   version "7.1.0"

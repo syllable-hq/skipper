@@ -22,7 +22,8 @@ export default {
     type: 'website',
   }),
   plugins: [
-    "react-static-plugin-sass",
+    'react-static-plugin-sass',
+    'react-static-plugin-reach-router',
   ],
   siteRoot: siteRoot,
   stagingSiteRoot: stagingSiteRoot,
@@ -38,6 +39,10 @@ export default {
     {
       path: '/dashboard',
       template: 'src/Components/Dashboard'
+    },
+    {
+      path: '/secrets/:id',
+      template: 'src/Components/Secrets'
     },
     {
       path: '/credential',
@@ -71,14 +76,14 @@ export default {
     return (
       <Html lang="en-US">
         <Head>
-          <meta charSet="UTF-8"/>
-          <meta name="viewport" content="width=device-width, initial-scale=1"/>
-          <link rel="preload" as="font" href="/fonts/Matter-Regular.woff2" type="font/woff2" crossOrigin="anonymous"/>
-          <link rel="preload" as="font" href="/fonts/Matter-Regular.woff" type="font/woff" crossOrigin="anonymous"/>
-          <link rel="preload" as="font" href="/fonts/Matter-SemiBold.woff2" type="font/woff2" crossOrigin="anonymous"/>
-          <link rel="preload" as="font" href="/fonts/Matter-SemiBold.woff" type="font/woff" crossOrigin="anonymous"/>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="preload" as="font" href="/fonts/Matter-Regular.woff2" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" as="font" href="/fonts/Matter-Regular.woff" type="font/woff" crossOrigin="anonymous" />
+          <link rel="preload" as="font" href="/fonts/Matter-SemiBold.woff2" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" as="font" href="/fonts/Matter-SemiBold.woff" type="font/woff" crossOrigin="anonymous" />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossOrigin="anonymous" />
+            crossOrigin="anonymous" />
 
           <title>{staticSiteData.title}</title>
           <meta name="title" content={staticSiteData.title} />

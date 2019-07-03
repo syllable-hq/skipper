@@ -16,7 +16,7 @@
     "serve": "serve dist -p 3000 -s"
   },
   "dependencies": {
-    "@reach/router": "^1.2.1",
+    "@reach/router": "1.2.1",
     "axios": "^0.18.0",
     "bcryptjs": "2.4.3",
     "bootstrap": "4.3.1",
@@ -33,6 +33,7 @@
     "react-dom": "^16.8.2",
     "react-hot-loader": "^4.11.1",
     "react-static": "^7.0.0",
+    "react-static-plugin-reach-router": "7.0.10",
     "react-static-plugin-sass": "7.1.0",
     "react-static-plugin-sitemap": "^7.0.0",
     "react-static-plugin-source-filesystem": "^7.0.0",
