@@ -1,4 +1,4 @@
-import { redirectTo } from '@reach/router';
+import { navigate } from "@reach/router";
 import SimpleCrypto from 'simple-crypto-js';
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
@@ -48,10 +48,6 @@ function cypherObject(object) {
 
 export function getUserInfo() {
   const currentUserKey = storage.getItem(CURRENT_USER_KEY);
-  if (!currentUserKey) {
-    logout();
-    return redirectTo('/');
-  }
   const userInfo = storage.getItem(currentUserKey);
   return JSON.parse(userInfo);
 }
@@ -69,6 +65,7 @@ export function getUserName() {
 
 export function getCredentialAt(index) {
   const userInfo = getUserInfo();
+  if (!userInfo) return;
   const credential = userInfo.credentials[index];
   const masterPass = getMasterPassword();
   var simpleCrypto = new SimpleCrypto(masterPass);
@@ -130,10 +127,15 @@ function generateUserNameFromHash() {
   return phonetic.generate({ seed: storage.getItem(USER_KEY) });
 }
 
-export function logout() {
+export function clearStorage() {
   storage.clear();
   const cookies = new Cookies();
   cookies.remove(COOKIE_MASTER_PASSWORD);
+}
+
+export function logout() {
+  clearStorage();
+  navigate('/login');
 }
 
 export function userLogged() {

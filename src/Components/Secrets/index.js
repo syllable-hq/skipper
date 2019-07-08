@@ -8,12 +8,12 @@ import copyClipboard from 'clipboard-copy';
 import Alert from 'react-bootstrap/Alert';
 
 import { DASHBOARD_PATH } from '../../constants';
-import { getCredentialAt } from '../../utils';
+import { getCredentialAt, logout } from '../../utils';
 
 import './index.scss';
 
-function RowItem({label, value, valueCopiedHandler}) {
-  return(
+function RowItem({ label, value, valueCopiedHandler }) {
+  return (
     <Row>
       <Col className="text-left">
         <Row>
@@ -23,7 +23,7 @@ function RowItem({label, value, valueCopiedHandler}) {
         </Row>
         <Row>
           <Col>
-            <Form.Label>{label === 'Secret' ? '************' : value }</Form.Label>
+            <Form.Label>{label === 'Secret' ? '************' : value}</Form.Label>
           </Col>
         </Row>
       </Col>
@@ -37,6 +37,11 @@ function RowItem({label, value, valueCopiedHandler}) {
 function Secrets(props) {
   const { id } = props;
   const credential = getCredentialAt(id);
+  if (!credential) {
+    logout();
+    return (<div></div>)
+  }
+
   const [copiedFlag, setFlag] = useState(false);
 
   function valueCopiedHandler(value) {
@@ -44,16 +49,17 @@ function Secrets(props) {
     copyClipboard(value);
     setTimeout(() => setFlag(false), 2000)
   }
-  return(
+
+  return (
     <div className="page page-secrets">
       <NavMain />
       <div className="page-inner">
         <div className="page-panel">
 
           <h1>SECRET BURIED:</h1>
-          { copiedFlag && <Alert className="alert-copied" variant="info">
+          {copiedFlag && <Alert className="alert-copied" variant="info">
             Value Copied!
-          </Alert> }
+            </Alert>}
           <span className="subtitle">Secret Info:</span>
 
           <Form.Group>

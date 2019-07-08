@@ -6,7 +6,7 @@ import Alert from 'react-bootstrap/Alert';
 import { withFirebase } from '../../Firebase';
 
 import {
-  logout,
+  clearStorage,
   saveMasterPassword,
   findUserMatch,
 } from '../../utils';
@@ -19,7 +19,7 @@ import {
 import './index.scss';
 
 function Login(props) {
-  logout();
+  clearStorage();
   const inputPasswordEl = useRef(null);
   const [message, setMessage] = useState('');
 
@@ -27,27 +27,27 @@ function Login(props) {
     evt.preventDefault();
     const password = inputPasswordEl.current.value;
     props.db.getAllUsers()
-    .then(querySnapshot => {
-      const users = [];
-      querySnapshot.forEach(function(doc) {
-        const userObject = Object.assign({}, doc.data(), {id: doc.id});
-        users.push(userObject);
+      .then(querySnapshot => {
+        const users = [];
+        querySnapshot.forEach(function (doc) {
+          const userObject = Object.assign({}, doc.data(), { id: doc.id });
+          users.push(userObject);
+        });
+        const userFound = findUserMatch(password, users);
+        if (!userFound) {
+          setMessage('User Not Found');
+          setTimeout(() => setMessage(''), 2000);
+          return;
+        }
+        saveMasterPassword(password);
+        localStorage.setItem(userFound.userKey, JSON.stringify(userFound));
+        localStorage.setItem(CURRENT_USER_KEY, userFound.userKey);
+        localStorage.setItem(USER_ID, userFound.id);
+        window.location.href = DASHBOARD_PATH;
       });
-      const userFound = findUserMatch(password, users);
-      if(!userFound) {
-        setMessage('User Not Found');
-        setTimeout(() => setMessage(''), 2000);
-        return;
-      }
-      saveMasterPassword(password);
-      localStorage.setItem(userFound.userKey, JSON.stringify(userFound));
-      localStorage.setItem(CURRENT_USER_KEY, userFound.userKey);
-      localStorage.setItem(USER_ID, userFound.id);
-      window.location.href = DASHBOARD_PATH;
-    });
   }
 
-  return(
+  return (
     <div className="page page-login">
       <NavMain />
       <div className="page-inner">
@@ -59,7 +59,7 @@ function Login(props) {
               <Form.Control ref={inputPasswordEl} type="password" />
               <a href="/">What if I forget my Master Password?</a>
             </Form.Group>
-            { message && <Alert variant='danger'> {message} </Alert> }
+            {message && <Alert variant='danger'> {message} </Alert>}
             <Button type="submit" onClick={loginAction} className="login-button" variant="secondary">Login</Button>
           </Form>
         </div>

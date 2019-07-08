@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { redirectTo } from '@reach/router';
 import { getCredentials } from '../../utils';
 import { USER_ID } from '../../constants';
 import { logout } from '../../utils';
@@ -11,7 +10,7 @@ export default function useFetchCredential(props) {
     const userId = localStorage.getItem(USER_ID);
     if (!userId) {
       logout();
-      return redirectTo('/');
+      return;
     }
     props.db.getUserInfo(userId)
       .then(doc => {
