@@ -1,3 +1,4 @@
+import { redirectTo } from '@reach/router';
 import SimpleCrypto from 'simple-crypto-js';
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
@@ -47,6 +48,10 @@ function cypherObject(object) {
 
 export function getUserInfo() {
   const currentUserKey = storage.getItem(CURRENT_USER_KEY);
+  if (!currentUserKey) {
+    logout();
+    return redirectTo('/');
+  }
   const userInfo = storage.getItem(currentUserKey);
   return JSON.parse(userInfo);
 }
@@ -122,11 +127,10 @@ export function createUserStorage(userKey) {
 }
 
 function generateUserNameFromHash() {
- return phonetic.generate({ seed: storage.getItem(USER_KEY) });
+  return phonetic.generate({ seed: storage.getItem(USER_KEY) });
 }
 
 export function logout() {
-  // storage.removeItem(CURRENT_USER_KEY);
   storage.clear();
   const cookies = new Cookies();
   cookies.remove(COOKIE_MASTER_PASSWORD);
@@ -178,13 +182,13 @@ export function filterList(q, list) {
 }
 
 export function cypherMasterPassword(password) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     bcrypt.genSalt(10, function (err, salt) {
-      if(err){
+      if (err) {
         return reject(err);
       }
-      bcrypt.hash(password, salt, function(err, hash) {
-        if(err) {
+      bcrypt.hash(password, salt, function (err, hash) {
+        if (err) {
           return reject(err);
         }
         resolve(hash);
@@ -216,11 +220,11 @@ export function buildURLParam(obj, prefix) {
 
 export function buildCredential(dataArray) {
   return dataArray.map(credential => {
-   return {
-    website: credential[0],
-    primaryUser: credential[1],
-    secundaryUser: credential[2],
-    password: credential[3],
-   };
+    return {
+      website: credential[0],
+      primaryUser: credential[1],
+      secundaryUser: credential[2],
+      password: credential[3],
+    };
   });
 }

@@ -1,17 +1,23 @@
 import { useState, useEffect } from 'react';
+import { redirectTo } from '@reach/router';
 import { getCredentials } from '../../utils';
 import { USER_ID } from '../../constants';
+import { logout } from '../../utils';
 
-export default  function useFetchCredential(props) {
+export default function useFetchCredential(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const userId = localStorage.getItem(USER_ID)
+    const userId = localStorage.getItem(USER_ID);
+    if (!userId) {
+      logout();
+      return redirectTo('/');
+    }
     props.db.getUserInfo(userId)
-    .then(doc => {
-      const credentials = getCredentials(doc.data().credentials);
-      return setData(credentials);
-    });
+      .then(doc => {
+        const credentials = getCredentials(doc.data().credentials);
+        return setData(credentials);
+      });
   }, []);
   return data;
 }
