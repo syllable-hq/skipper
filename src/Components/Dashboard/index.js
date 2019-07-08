@@ -37,6 +37,9 @@ function Dashboard(props) {
 
   const csvData = credentials.map(cred => [cred.website, cred.primaryUser, cred.secundaryUser, cred.password]);
 
+  // Define csv headers
+  csvData.unshift(['Website', 'Password', 'Primary User', 'Secondary User'])
+
   useEffect(() => {
     setDisplay(credentials);
   }, [credentials])
@@ -63,21 +66,21 @@ function Dashboard(props) {
     const credentialsObject = buildCredential(data);
     const userInfo = addCredentialInfo(credentialsObject);
     props.db.saveUserInfo(userInfo)
-    .then(() => {
-      setDisplay([...credentials, ...credentialsObject])
-    });
+      .then(() => {
+        setDisplay([...credentials, ...credentialsObject])
+      });
   }
 
   function removeHandler(indexItem) {
     const userInfo = removeCredential(indexItem);
     props.db.saveUserInfo(userInfo)
-    .then(() => {
-      setDisplay(getCredentials(userInfo.credentials));
-    });
+      .then(() => {
+        setDisplay(getCredentials(userInfo.credentials));
+      });
   }
 
   function editHandler(indexItem) {
-    const credential =  credentials[indexItem];
+    const credential = credentials[indexItem];
     setIndexToUpdate(indexItem);
     setCredential(credential);
     setShowEditModal(!showEditModal);
@@ -93,47 +96,47 @@ function Dashboard(props) {
     hideHandler();
     const userInfo = setCredentials(credentials);
     props.db.saveUserInfo(userInfo)
-    .then(() => {
-      setDisplay([...credentials])
-    });
+      .then(() => {
+        setDisplay([...credentials])
+      });
   }
 
-  return(
+  return (
     <div className="page dashboard">
-      <NavMain activePage='home'/>
-        <div className="page-inner">
-          <div className="page-panel">
-            <h1>DASHBOARD</h1>
+      <NavMain activePage='home' />
+      <div className="page-inner">
+        <div className="page-panel">
+          <h1>DASHBOARD</h1>
 
-            <Form.Group>
-              <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
-            </Form.Group>
+          <Form.Group>
+            <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
+          </Form.Group>
 
-            <span>Recent Searches</span>
+          <span>Recent Searches</span>
 
-            <Table striped>
-              <tbody>
-                { display.map(credentialRow) }
-              </tbody>
-            </Table>
+          <Table striped>
+            <tbody>
+              {display.map(credentialRow)}
+            </tbody>
+          </Table>
 
-            <a href="/credential">
-              <button className="btn-add"><span>+</span></button>
-            </a>
+          <a href="/credential">
+            <button className="btn-add"><span>+</span></button>
+          </a>
 
-            <CSVReader
-              label="Upload your passwords from a csv"
-              onFileLoaded={handleForce}
-              inputId="password-reader"
-            />
-            <CSVLink data={csvData}>Export Credentials</CSVLink>
-            <Modal show={showEditModal} onHide={hideHandler}>
-              <Modal.Body>
-                <CredentialForm {...credential} updateHandler={updateHandler}  />
-              </Modal.Body>
-            </Modal>
-          </div>
+          <CSVReader
+            label="Upload your passwords from a csv"
+            onFileLoaded={handleForce}
+            inputId="password-reader"
+          />
+          <CSVLink data={csvData}>Export Credentials</CSVLink>
+          <Modal show={showEditModal} onHide={hideHandler}>
+            <Modal.Body>
+              <CredentialForm {...credential} updateHandler={updateHandler} />
+            </Modal.Body>
+          </Modal>
         </div>
+      </div>
     </div>
   );
 }
