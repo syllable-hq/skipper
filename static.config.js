@@ -41,10 +41,6 @@ export default {
       template: 'src/Components/Dashboard'
     },
     {
-      path: '/secrets/:id',
-      template: 'src/Components/Secrets'
-    },
-    {
       path: '/credential',
       template: 'src/Components/Credential'
     },
