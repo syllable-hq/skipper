@@ -12,12 +12,13 @@ import {
   findUserMatch,
   cypherMasterPassword,
   createUserStorage,
- } from '../../utils';
-import { 
+} from '../../utils';
+import {
   RANDOMIZE_PATTERN,
   RANDOMIZE_LENGTH,
   SIGNUP_CONFIRMATION_PATH,
   USER_ID,
+  PASSWORD_LENGTH
 } from '../../constants';
 
 import './index.scss';
@@ -46,29 +47,34 @@ function Signup(props) {
   function nextHandler() {
     const passwordToUse = typedPassword ? typedPassword : masterPassword;
 
-    props.db.getAllUsers()
-    .then(querySnapshot => {
-      const users = [];
-      querySnapshot.forEach(function(doc) {
-        const userObject = Object.assign({}, doc.data(), {id: doc.id});
-        users.push(userObject);
-      });
+    if (typedPassword && typedPassword.length < PASSWORD_LENGTH) {
+      setMessage(`Password is to short! At least ${PASSWORD_LENGTH} character required`);
+      return;
+    }
 
-      const userFound = findUserMatch(passwordToUse, users);
-      if (userFound) {
-        setMessage('Password Found');
-        return;
-      }
-      return cypherMasterPassword(passwordToUse)
-    })
-    .then(hashedPassword => {
-      const user = createUserStorage(hashedPassword);
-      return props.db.createUserInfo(user);
-    })
-    .then(doc => {
-      localStorage.setItem(USER_ID, doc.id);
-      window.location.href = SIGNUP_CONFIRMATION_PATH;
-    });
+    props.db.getAllUsers()
+      .then(querySnapshot => {
+        const users = [];
+        querySnapshot.forEach(function (doc) {
+          const userObject = Object.assign({}, doc.data(), { id: doc.id });
+          users.push(userObject);
+        });
+
+        const userFound = findUserMatch(passwordToUse, users);
+        if (userFound) {
+          setMessage('Password Found');
+          return;
+        }
+        return cypherMasterPassword(passwordToUse)
+      })
+      .then(hashedPassword => {
+        const user = createUserStorage(hashedPassword);
+        return props.db.createUserInfo(user);
+      })
+      .then(doc => {
+        localStorage.setItem(USER_ID, doc.id);
+        window.location.href = SIGNUP_CONFIRMATION_PATH;
+      });
   }
 
   function copyToClipboard() {
@@ -79,17 +85,17 @@ function Signup(props) {
 
   return (
     <div className="page page-home">
-      <NavMain activePage='home'/>
+      <NavMain activePage='home' />
       <div className="page-inner">
         <div className="page-panel">
           <h1>SIGN UP</h1>
-          { message && <Alert variant='danger'> {message} </Alert> }
-          { copiedFlag && <Alert className="alert-copied" variant="info">
+          {message && <Alert variant='danger'> {message} </Alert>}
+          {copiedFlag && <Alert className="alert-copied" variant="info">
             Value Copied!
-          </Alert> }
+          </Alert>}
           <Form.Group>
             <Form.Label>Generate Master Password</Form.Label>
-            <Form.Control type="text" value={masterPassword} placeholder="Generate me!" readOnly={true}/>
+            <Form.Control type="text" value={masterPassword} placeholder="Generate me!" readOnly={true} />
           </Form.Group>
 
           <Form.Group>

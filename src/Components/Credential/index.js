@@ -10,7 +10,6 @@ import {
   RANDOMIZE_PATTERN,
   RANDOMIZE_LENGTH,
   DASHBOARD_PATH,
-  PASSWORD_LENGTH,
 } from '../../constants';
 import { addCredentialInfo } from '../../utils';
 
@@ -31,15 +30,11 @@ function Credential(props) {
   }
 
   function addCredential() {
-    if(password.length < PASSWORD_LENGTH) {
-      setMessage(`Password is to short! At least ${PASSWORD_LENGTH} character required`);
-      return;
-    }
-    const userInfo = addCredentialInfo([{website, password, primaryUser, secundaryUser}]);
+    const userInfo = addCredentialInfo([{ website, password, primaryUser, secundaryUser }]);
     props.db.saveUserInfo(userInfo)
-    .then(() => {
-      window.location.href = DASHBOARD_PATH;
-    });
+      .then(() => {
+        window.location.href = DASHBOARD_PATH;
+      });
   }
 
   function changeWebsiteHandler(event) {
@@ -58,29 +53,29 @@ function Credential(props) {
     setPassword(event.target.value);
   }
 
-  return(
+  return (
     <div className="page page-credential">
-      <NavMain activePage='home'/>
+      <NavMain activePage='home' />
       <div className="page-inner">
         <div className="page-panel">
           <h1>CREATE</h1>
 
           <span>Create a new secret:</span>
 
-          { message && <Alert variant='warning'> {message} </Alert> }
+          {message && <Alert variant='warning'> {message} </Alert>}
 
           <Form.Group className="form-group">
             <Form.Label>URL:</Form.Label>
-            <Form.Control type="text" value={website} onChange={changeWebsiteHandler} placeholder="http://www.website.com"/>
+            <Form.Control type="text" value={website} onChange={changeWebsiteHandler} placeholder="http://www.website.com" />
 
             <Form.Label>Username Primary:</Form.Label>
-            <Form.Control type="text" value={primaryUser} onChange={changePrimaryHandler} placeholder="myusername or user@mail.com"/>
+            <Form.Control type="text" value={primaryUser} onChange={changePrimaryHandler} placeholder="myusername or user@mail.com" />
 
             <Form.Label>Username Secondary:</Form.Label>
             <Form.Control type="text" value={secundaryUser} onChange={changeSecundaryHandler} />
 
             <Form.Label>Secret:</Form.Label>
-            <Form.Control type="text"  onChange={changePasswordHandler}  value={password} placeholder="***********" />
+            <Form.Control type="text" onChange={changePasswordHandler} value={password} placeholder="***********" />
 
             <Button onClick={generatePassword} className="generate-button" variant="secondary">Generate</Button>
           </Form.Group>
