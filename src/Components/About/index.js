@@ -1,7 +1,7 @@
 import React from 'react';
 import NavMain from '../NavMain';
 import './index.scss';
- 
+
 function About() {
   return (
     <div className="page page-about">
@@ -10,10 +10,13 @@ function About() {
         <div className="page-panel">
           <div>
             <section>
-              <h2 className="h2">
-                About Us
-              </h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+              <h3 className="h3">
+                What is Skipper?
+              </h3>
+              <p>Skipper is a dead-simple password manager.<a href="#">Thank goodness because I can never remember all my website login credentials!</a></p>
+              <p>Skipper is safe, secure and robust.<a href="#">How?</a></p>
+              <p>Skipper is Open Source.<a href="#">Why is this good? Get involve</a></p>
+              <p>Skipper keeps your secrets using a method where no one knows any of your secrets except you.<a href="#">Where can I learn more?</a></p>
             </section>
           </div>
         </div>

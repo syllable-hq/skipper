@@ -45,16 +45,26 @@ export default {
       template: 'src/Components/Credential'
     },
     {
-      path: '/signup_confirmation',
-      template: 'src/Components/SignupConfirmation'
+      path: '/about',
+      template: 'src/Components/About',
+      noindex: true,
+    },
+    {
+      path: '/contact',
+      template: 'src/Components/Contact',
+      noindex: true,
     },
     {
       path: '/signup',
       template: 'src/Components/Signup'
     },
     {
-      path: '/about',
-      template: 'src/Components/About',
+      path: '/signup_confirmation',
+      template: 'src/Components/SignupConfirmation'
+    },
+    {
+      path: '/faq',
+      template: 'src/Components/Faq',
       noindex: true,
     },
     {

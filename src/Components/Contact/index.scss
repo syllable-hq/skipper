@@ -1,0 +1,9 @@
+@import '../../shared-styles/variables.scss';
+@import '../../shared-styles/mixins.scss';
+
+.page-about {
+    .page-panel {
+        position: relative;
+        font-size: $font-size-md;
+    }
+}
