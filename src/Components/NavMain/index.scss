@@ -3,10 +3,37 @@
 
 .nav-main {
   background-color: #fff;
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
   position: fixed;
   width: 100%;
   z-index: 3;
+
+  .nav-container {
+    overflow: hidden;
+
+    label.app-title {
+      position: absolute;
+      width: 80px;
+      text-align: center;
+      left: 50%;
+      margin-left: -40px;
+      height: 24px;
+      margin-top: 18px;
+      font-size: 24px;
+    }
+
+    a {
+      float: left;
+    }
+  }
+
+  // .menu-container {
+  //   position: fixed;
+  //   width: 100%;
+  //   top: 0;
+  //   bottom: 0;
+  //   min-height: 100vh;
+  // }
 
   ul {
     margin: 0;
@@ -33,7 +60,7 @@
     display: block;
     float: left;
     font-size: 2em;
-    padding: 10px 20px;
+    padding: 12px 20px;
     text-decoration: none;
     width: $nav-main-height;
   }
@@ -53,7 +80,7 @@
     cursor: pointer;
     display: inline-block;
     float: right;
-    padding: 50px 20px;
+    padding: 30px 20px;
     position: relative;
     user-select: none;
   }
@@ -61,10 +88,10 @@
   .menu-icon .navicon {
     background: #333;
     display: block;
-    height: 2px;
+    height: 4px;
     position: relative;
     transition: background .2s ease-out;
-    width: 18px;
+    width: 35px;
   }
 
   .menu-icon .navicon:before,
@@ -79,11 +106,11 @@
   }
 
   .menu-icon .navicon:before {
-    top: 5px;
+    top: 10px;
   }
 
   .menu-icon .navicon:after {
-    top: -5px;
+    top: -10px;
   }
 
   /* menu btn */
@@ -91,41 +118,61 @@
     display: none;
   }
 
-  .menu-btn:checked ~ .menu {
+  .menu-btn:checked~.menu {
     max-height: 50%;
   }
 
-  .menu-btn:checked ~ .menu-icon .navicon {
+  .menu-btn:checked~.menu-icon .navicon {
     background: transparent;
   }
 
-  .menu-btn:checked ~ .menu-icon .navicon:before {
+  .menu-btn:checked~.menu-icon .navicon:before {
     transform: rotate(-45deg);
   }
 
-  .menu-btn:checked ~ .menu-icon .navicon:after {
+  .menu-btn:checked~.menu-icon .navicon:after {
     transform: rotate(45deg);
   }
 
-  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  .menu-btn:checked~.menu-icon:not(.steps) .navicon:before,
+  .menu-btn:checked~.menu-icon:not(.steps) .navicon:after {
     top: 0;
   }
 
-  @media  screen and (min-width: 48em) {
+  @media screen and (min-width: 48em) {
     li {
       float: left;
     }
+
     li a {
       padding: 20px 30px;
     }
+
     .menu {
       clear: none;
       float: right;
       max-height: none;
     }
+
     .menu-icon {
       display: none;
     }
+  }
+}
+
+
+@media #{$tablet} {
+  label.app-title {
+    display: none;
+  }
+
+  .nav-main li a {
+    padding: 10px 20px;
+  }
+}
+
+@media #{$desktop} {
+  .nav-main li a {
+    padding: 20px 30px;
   }
 }

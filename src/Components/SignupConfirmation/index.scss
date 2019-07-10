@@ -1,11 +1,8 @@
-.signup-confirmation{
+@import '../../shared-styles/variables.scss';
+
+.signup-confirmation {
   .page-panel {
     position: relative;
-  }
-
-  .sub-title {
-    text-align: center;
-    display: block;
   }
 
   h2 {
@@ -14,6 +11,59 @@
 
   .edit-button {
     float: left;
+    margin-top: 10px;
   }
 
+  .name-group {
+    label {
+      width: 100%;
+
+      span {
+        float: left;
+        margin-top: 5px;
+      }
+
+      input {
+        float: left;
+        width: 75%;
+        margin-left: 10px;
+      }
+    }
+
+    button {
+      width: 85px;
+    }
+  }
+
+  .get-started {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding-top: 7rem;
+
+    button {
+      margin-top: 5px;
+      width: 150px;
+    }
+  }
+}
+
+@media #{$tablet} {
+  input {
+    width: 30% !important;
+  }
+
+  .get-started {
+    width: 30% !important;
+  }
+}
+
+@media #{$desktop} {
+  input {
+    width: 30% !important;
+  }
+
+  .get-started {
+    width: 30% !important;
+  }
 }

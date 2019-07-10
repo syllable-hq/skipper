@@ -2,13 +2,21 @@
 @import '../../shared-styles/mixins.scss';
 
 .page-home {
+
+  input {
+    margin: 10px 0 10px 0;
+  }
+
   .info {
-    color: $color-link!important;
+    color: $color-link !important;
     font-size: 1rem;
+    float: right;
   }
 
   .generate-button {
     float: left;
+    background-color: #1d79ca;
+    border-color: #1d79ca;
   }
 
   .copy-button {
@@ -16,8 +24,19 @@
   }
 
   .divider {
-    margin: 4rem 0;
+    margin: 2rem 0;
     padding-top: 4rem;
+  }
+
+  .next {
+    position: relative;
+
+    button {
+      position: absolute;
+      top: 35px;
+      right: 0;
+      width: 80px;
+    }
   }
 
   .page-panel {
@@ -30,7 +49,20 @@
     width: 0;
     overflow: hidden;
   }
+
   .next-button {
     float: right;
+  }
+
+  .back-login {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding-top: 9rem;
+
+    p {
+      margin-bottom: 5px;
+      width: 190px;
+    }
   }
 }

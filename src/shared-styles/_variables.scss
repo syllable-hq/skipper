@@ -31,9 +31,10 @@ $color-sky-top: #b1b1c0;
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+000-5FF; /* Download only latin glyphs */
+  unicode-range: U+000-5FF;
+  /* Download only latin glyphs */
   src: url('/fonts/Matter-Regular.woff2') format('woff2'),
-       url('/fonts/Matter-Regular.woff') format('woff');
+    url('/fonts/Matter-Regular.woff') format('woff');
 }
 
 @font-face {
@@ -41,14 +42,17 @@ $color-sky-top: #b1b1c0;
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+000-5FF; /* Download only latin glyphs */
+  unicode-range: U+000-5FF;
+  /* Download only latin glyphs */
   src: url('/fonts/Matter-SemiBold.woff2') format('woff2'),
-       url('/fonts/Matter-SemiBold.woff') format('woff');
+    url('/fonts/Matter-SemiBold.woff') format('woff');
 }
 
-$font-family: 'Matter-SemiBold', serif; //sans-serif;
+$font-family: 'Matter-SemiBold',
+serif; //sans-serif;
 
-$font-family-reg: 'Matter-Regular', serif; //sans-serif;
+$font-family-reg: 'Matter-Regular',
+serif; //sans-serif;
 
 $letter-spacing: -.035em;
 $letter-spacing-small-text: .04em;
@@ -76,7 +80,7 @@ $screen-size-tiny: 25rem;
 // $page-width: 60rem; //960px
 $page-width: 100%;
 
-$nav-side-width: 2.5rem;
+$nav-side-width: 1.5rem;
 $nav-border-size: 2px;
 $slogan-border-size: .25rem;
 $nav-main-height: 5rem;
@@ -86,7 +90,12 @@ $tagline-offset: 8vh;
 $transition-time: .25s;
 
 // $animation-transition: ease-in-out .4s all;
-$animation-transition: .25s cubic-bezier(0,.92,.62,1) all;
+$animation-transition: .25s cubic-bezier(0, .92, .62, 1) all;
 $icon-hover-scale: 1.1;
 
-$maxWidth: 900px
+$maxWidth: 900px;
+
+// Media sizes
+$mobile: 'only screen and (min-width: 20em)';
+$tablet: 'only screen and (min-width: 48em)';
+$desktop: 'only screen and (min-width: 64em)';

@@ -11,18 +11,34 @@
     cursor: pointer;
   }
 
-  .btn-add{
-    float: right;
-    text-decoration: none;
-    color: white;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background-color: grey;
-    align-content: center;
-    span {
-      font-size: 4rem;
-      vertical-align: middle;
+  .recent-searches {
+    float: left;
+    margin-bottom: 10px;
+  }
+
+  li {
+    font-size: 18px;
+  }
+
+  .btn-add-container {
+    overflow: hidden;
+
+    .btn-add {
+      float: right;
+      text-decoration: none;
+      color: white;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: grey;
+      align-content: center;
+
+      span {
+        font-size: 4rem;
+        position: relative;
+        bottom: 18px;
+        right: 1px;
+      }
     }
   }
 }

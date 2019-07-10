@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { navigate } from "@reach/router";
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -83,6 +84,10 @@ function Signup(props) {
     setTimeout(() => setFlag(false), 2000)
   }
 
+  function loginAction(evt) {
+    navigate('/login');
+  }
+
   return (
     <div className="page page-home">
       <NavMain activePage='home' />
@@ -107,15 +112,18 @@ function Signup(props) {
 
           <Form.Group>
             <Form.Label>Choose your Master Password</Form.Label>
-            <Form.Control type="password" value={typedPassword} onChange={typedPasswordHandler} placeholder="xxxxxxxxxxxxxxxx" />
-            <a className="info">Why 15 characters?</a>
+            <Form.Control type="password" value={typedPassword} onChange={typedPasswordHandler} placeholder="xxxxxxxxxxxx" />
+            <a className="info">Why 12 characters?</a>
           </Form.Group>
-
-          <Form.Group>
+          <div className="next">
             <Button onClick={nextHandler} className="next-button" variant="secondary">
               Next
             </Button>
-          </Form.Group>
+          </div>
+          <div className="back-login">
+            <p>Already on Skipper?</p>
+            <Button type="button" onClick={loginAction} className="login-button" variant="secondary">Log In</Button>
+          </div>
         </div>
       </div>
     </div>

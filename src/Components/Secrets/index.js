@@ -56,28 +56,32 @@ function Secrets(props) {
       <div className="page-inner">
         <div className="page-panel">
 
-          <h1>SECRET BURIED:</h1>
+          <h1>SECRET BURIED!</h1>
           {copiedFlag && <Alert className="alert-copied" variant="info">
             Value Copied!
             </Alert>}
-          <span className="subtitle">Secret Info:</span>
 
-          <Form.Group>
-            <RowItem valueCopiedHandler={valueCopiedHandler} label="URL" value={credential.website} />
-          </Form.Group>
+          <div className="subtitle">
+            <span>Secret Info:</span>
+          </div>
 
-          <Form.Group>
-            <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Primary" value={credential.primaryUser} />
-          </Form.Group>
+          <div className="secrets-group">
+            <Form.Group>
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="URL" value={credential.website} />
+            </Form.Group>
 
-          <Form.Group>
-            <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Secondary" value={credential.secundaryUser} />
-          </Form.Group>
+            <Form.Group>
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Primary" value={credential.primaryUser} />
+            </Form.Group>
 
-          <Form.Group>
-            <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={credential.password} />
-          </Form.Group>
+            <Form.Group>
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Secondary" value={credential.secundaryUser} />
+            </Form.Group>
 
+            <Form.Group>
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={credential.password} />
+            </Form.Group>
+          </div>
           <Form.Group>
             <a className="dashboard-link" href={DASHBOARD_PATH}>
               <Button variant="secondary">Dashboard</Button>

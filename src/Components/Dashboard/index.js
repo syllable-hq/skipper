@@ -16,8 +16,6 @@ import {
   buildURLParam,
   buildCredential,
   addCredentialInfo,
-  removeCredential,
-  getCredentials,
   setCredentials,
 } from '../../utils';
 
@@ -46,7 +44,6 @@ function Dashboard(props) {
 
   function credentialRow(credential, i) {
     return <CredentialRow key={i} indexItem={i} {...credential}
-      removeHandler={removeHandler} editHandler={editHandler}
       goToCredential={() => goToCredential(i)} />
   }
 
@@ -69,21 +66,6 @@ function Dashboard(props) {
       .then(() => {
         setDisplay([...credentials, ...credentialsObject])
       });
-  }
-
-  function removeHandler(indexItem) {
-    const userInfo = removeCredential(indexItem);
-    props.db.saveUserInfo(userInfo)
-      .then(() => {
-        setDisplay(getCredentials(userInfo.credentials));
-      });
-  }
-
-  function editHandler(indexItem) {
-    const credential = credentials[indexItem];
-    setIndexToUpdate(indexItem);
-    setCredential(credential);
-    setShowEditModal(!showEditModal);
   }
 
   function hideHandler() {
@@ -112,17 +94,19 @@ function Dashboard(props) {
             <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
           </Form.Group>
 
-          <span>Recent Searches</span>
+          <div className="btn-add-container">
+            <a href="/credential">
+              <button className="btn-add"><span>+</span></button>
+            </a>
+          </div>
+
+          <span className="recent-searches">Recent Searches</span>
 
           <Table striped>
             <tbody>
               {display.map(credentialRow)}
             </tbody>
           </Table>
-
-          <a href="/credential">
-            <button className="btn-add"><span>+</span></button>
-          </a>
 
           <CSVReader
             label="Upload your passwords from a csv"

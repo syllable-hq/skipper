@@ -17,37 +17,32 @@ function SingupConfirmation() {
     updateUserName(userName);
   }
 
-  return(
+  return (
     <div className="page signup-confirmation">
-      <NavMain activePage='home'/>
+      <NavMain activePage='home' />
       <div className="page-inner">
         <div className="page-panel">
-          <h1>SIGN UP</h1>
-          <span className="sub-title">Confirmed</span>
+          <h1>
+            SIGN UP
+            <br></br>
+            Confirmed
+          </h1>
 
           <h2>Welcome Aboard!</h2>
-          <Form.Group>
-            <Form.Label>Name</Form.Label>
-            <Form.Control  type="text" value={userName} onChange={changeUserNameHandler} />
+          <Form.Group className="name-group">
+            <Form.Label><span>Name:</span> <Form.Control type="text" value={userName} onChange={changeUserNameHandler} /></Form.Label>
             <Button className="edit-button" onClick={editUsername} variant="secondary">Edit</Button>
+
           </Form.Group>
 
-          <div>
-            <span>FAQ</span>
-            <p>
-              Skipper doesn't known password and never will keep this password save.
-              Check out this <a href="/">resource</a> for how to follow best practice for staying safe.
-            </p>
-          </div>
-
-          <span>Lets Get Started...</span>
-          <Form.Group className="centered">
+          <div className="get-started">
+            <span>Lets Get Started...</span>
             <a href={DASHBOARD_PATH}>
               <Button variant="secondary">
                 Dashboard
               </Button>
             </a>
-          </Form.Group>
+          </div>
 
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { navigate } from "@reach/router";
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -47,6 +48,10 @@ function Login(props) {
       });
   }
 
+  function signupAction(evt) {
+    navigate('/signup');
+  }
+
   return (
     <div className="page page-login">
       <NavMain />
@@ -57,11 +62,17 @@ function Login(props) {
             <Form.Group className="form-group">
               <Form.Label>Master Password</Form.Label>
               <Form.Control ref={inputPasswordEl} type="password" />
-              <a href="/">What if I forget my Master Password?</a>
+              {message && <Alert variant='danger'> {message} </Alert>}
+              <div>
+                <a href="/">Forgot Master Password?</a>
+                <Button type="submit" onClick={loginAction} className="login-button" variant="secondary">Log In</Button>
+              </div>
             </Form.Group>
-            {message && <Alert variant='danger'> {message} </Alert>}
-            <Button type="submit" onClick={loginAction} className="login-button" variant="secondary">Login</Button>
           </Form>
+          <div className="signup-section">
+            <p>New to the ship?</p>
+            <Button type="button" onClick={signupAction} className="login-button" variant="secondary">Sign Up</Button>
+          </div>
         </div>
       </div>
     </div>
