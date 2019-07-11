@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
-import NavMain from '../NavMain';
-import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row'
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col'
 import copyClipboard from 'clipboard-copy';
-import Alert from 'react-bootstrap/Alert';
+import NavMain from '../NavMain';
+import useCredentialFetch from '../Dashboard/useStateCredentials';
+import { withFirebase } from '../../Firebase';
+import CredentialForm from '../Credential/form';
+
+import {
+  getCredentialAt,
+  logout,
+  setCredentials,
+  getCredentials,
+  removeCredential,
+} from '../../utils';
 
 import { DASHBOARD_PATH } from '../../constants';
-import { getCredentialAt, logout } from '../../utils';
 
 import './index.scss';
 
@@ -34,20 +45,68 @@ function RowItem({ label, value, valueCopiedHandler }) {
   );
 }
 
+// Secrets component
 function Secrets(props) {
-  const { id } = props;
-  const credential = getCredentialAt(id);
-  if (!credential) {
-    logout();
-    return (<div></div>)
-  }
+  const credentials = useCredentialFetch(props);
+  const [display, setDisplay] = useState([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [credential, setCredential] = useState({});
+  const [indexToUpdate, setIndexToUpdate] = useState(null);
 
   const [copiedFlag, setFlag] = useState(false);
 
+  const { id } = props;
+  const secrets = getCredentialAt(id);
+
+  validatePage(secrets);
+
+  // Validate if CURRENT_USER_KEY exist otherwise force logout 
+  function validatePage(credentialFound) {
+    if (!credentialFound) {
+      logout();
+      return (<div></div>)
+    }
+  }
+
+  // Copy secrets specific value
   function valueCopiedHandler(value) {
     setFlag(true);
     copyClipboard(value);
     setTimeout(() => setFlag(false), 2000)
+  }
+
+  // Delete secrets
+  function removeHandler(indexItem) {
+    const userInfo = removeCredential(indexItem);
+    props.db.saveUserInfo(userInfo)
+      .then(() => {
+        window.location.href = '/dashboard';
+      });
+  }
+
+  // Show edit secrets
+  function editHandler(indexItem) {
+    const credential = credentials[indexItem];
+    setIndexToUpdate(indexItem);
+    setCredential(credential);
+    setShowEditModal(!showEditModal);
+  }
+
+  // Hide edit secrets
+  function hideHandler() {
+    setShowEditModal(false);
+  }
+
+  // Update secrets
+  function updateHandler(data) {
+    const updateCredential = Object.assign({}, credential, data);
+    credentials.splice(indexToUpdate, 1, updateCredential);
+    hideHandler();
+    const userInfo = setCredentials(credentials);
+    props.db.saveUserInfo(userInfo)
+      .then(() => {
+        setDisplay([...credentials])
+      });
   }
 
   return (
@@ -67,19 +126,23 @@ function Secrets(props) {
 
           <div className="secrets-group">
             <Form.Group>
-              <RowItem valueCopiedHandler={valueCopiedHandler} label="URL" value={credential.website} />
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="URL" value={secrets.website} />
             </Form.Group>
 
             <Form.Group>
-              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Primary" value={credential.primaryUser} />
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Primary" value={secrets.primaryUser} />
             </Form.Group>
 
             <Form.Group>
-              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Secondary" value={credential.secundaryUser} />
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Username Secondary" value={secrets.secundaryUser} />
             </Form.Group>
 
             <Form.Group>
-              <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={credential.password} />
+              <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={secrets.password} />
+            </Form.Group>
+            <Form.Group className="actions">
+              <Button variant="danger" size="sm" onClick={() => removeHandler(id)}>Remove</Button>
+              <Button variant="dark" size="sm" onClick={() => editHandler(id)} >Edit</Button>
             </Form.Group>
           </div>
           <Form.Group>
@@ -87,10 +150,15 @@ function Secrets(props) {
               <Button variant="secondary">Dashboard</Button>
             </a>
           </Form.Group>
+          <Modal show={showEditModal} onHide={hideHandler}>
+            <Modal.Body>
+              <CredentialForm {...credential} updateHandler={updateHandler} />
+            </Modal.Body>
+          </Modal>
         </div>
       </div>
     </div>
   )
 }
 
-export default Secrets;
+export default withFirebase(Secrets);

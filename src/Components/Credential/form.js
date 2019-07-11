@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import './form.scss';
+
 function CredentialForm(props) {
 
   function changeWebsite(event) {
@@ -25,16 +27,16 @@ function CredentialForm(props) {
   const [password, setPassword] = useState(props.password);
 
   function saveHandler() {
-    props.updateHandler({website, primaryUser, secundaryUser, password});
+    props.updateHandler({ website, primaryUser, secundaryUser, password });
   }
 
-  return(
-    <Form.Group className="form-group">
+  return (
+    <Form.Group className="secrets-form">
       <Form.Label>URL:</Form.Label>
-      <Form.Control type="text" name="website" value={website} onChange={changeWebsite} placeholder="http://www.website.com"/>
+      <Form.Control type="text" name="website" value={website} onChange={changeWebsite} placeholder="http://www.website.com" />
 
       <Form.Label>Username Primary:</Form.Label>
-      <Form.Control type="text" name="primaryUser" value={primaryUser} onChange={changePrimaryUser}  placeholder="myusername or user@mail.com"/>
+      <Form.Control type="text" name="primaryUser" value={primaryUser} onChange={changePrimaryUser} placeholder="myusername or user@mail.com" />
 
       <Form.Label>Username Secondary:</Form.Label>
       <Form.Control type="text" name="secundaryUser" value={secundaryUser} onChange={changeSecundaryUser} />
@@ -42,7 +44,7 @@ function CredentialForm(props) {
       <Form.Label>Secret:</Form.Label>
       <Form.Control type="text" name="password" value={password} onChange={changePassword} placeholder="***********" />
 
-      <Button onClick={saveHandler}>Save</Button>
+      <Button onClick={saveHandler} variant="secondary">Save</Button>
     </Form.Group>
   );
 }
