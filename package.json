@@ -1,54 +1,34 @@
 {
-  "name": "Syllable-skipper",
-  "version": "1.0.2",
-  "main": "index.js",
+  "name": "razzle-examples-with-scss",
+  "version": "2.2.0",
   "license": "MIT",
-  "engines": {
-    "node": "10.15.0",
-    "npm": "6.4.1"
-  },
   "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "bundle": "react-static bundle",
-    "export": "react-static export",
-    "serve": "serve dist -p 3000 -s"
+    "start": "razzle start",
+    "build": "razzle build",
+    "test": "razzle test --env=jsdom",
+    "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "@reach/router": "1.2.1",
     "axios": "^0.18.0",
     "bcryptjs": "2.4.3",
     "bootstrap": "4.3.1",
     "clipboard-copy": "3.0.0",
-    "dotenv": "8.0.0",
+    "express": "^4.16.3",
     "firebase": "6.1.0",
     "localstorage-polyfill": "^1.0.1",
     "phonetic": "0.1.1",
     "randomatic": "3.1.1",
-    "react": "^16.8.2",
+    "react": "^16.4.1",
     "react-bootstrap": "1.0.0-beta.8",
     "react-csv": "^1.1.1",
     "react-csv-reader": "1.2.2",
-    "react-dom": "^16.8.2",
-    "react-hot-loader": "^4.11.1",
-    "react-static": "^7.0.0",
-    "react-static-plugin-reach-router": "7.0.10",
-    "react-static-plugin-sass": "7.1.0",
-    "react-static-plugin-sitemap": "^7.0.0",
-    "react-static-plugin-source-filesystem": "^7.0.0",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
     "simple-crypto-js": "2.0.2",
     "universal-cookie": "4.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "9.x",
-    "eslint": "5.x",
-    "eslint-config-react-app": "^3.0.8",
-    "eslint-config-react-tools": "1.x.x",
-    "eslint-plugin-flowtype": "2.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "7.x",
-    "serve": "10.1.2"
+    "razzle": "^2.2.0",
+    "razzle-plugin-scss": "^3.0.0"
   }
 }

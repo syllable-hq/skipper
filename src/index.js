@@ -1,40 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import Firebase, { FirebaseContext } from './Firebase';
+import app from './server';
+import http from 'http';
 
-// Your top level component
-import App from './App'
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
 
-// Export your top level component as JSX (for static rendering)
-export default App
+let currentApp = app;
 
-// Render your app
-if (typeof document !== 'undefined') {
-  const target = document.getElementById('root')
-
-  const renderMethod = target.hasChildNodes()
-    ? ReactDOM.hydrate
-    : ReactDOM.render
-
-  const render = Comp => {
-    renderMethod(
-      <AppContainer>
-        <FirebaseContext.Provider value={new Firebase()}>
-          <Comp />
-        </FirebaseContext.Provider>
-      </AppContainer>,
-      target
-    )
+server.listen(port, error => {
+  if (error) {
+    console.log(error);
   }
 
-  // Render!
-  render(App)
+  console.log(`🚀 started on port ${port}`);
+});
 
-  // Hot Module Replacement
-  if (module && module.hot) {
-    module.hot.accept('./App', () => {
-      render(App)
-    })
-  }
+if (module.hot) {
+  console.log('✅  Server-side HMR Enabled!');
+
+  module.hot.accept('./server', () => {
+    console.log('🔁  HMR Reloading `./server`...');
+    server.removeListener('request', currentApp);
+    const newApp = require('./server').default;
+    server.on('request', newApp);
+    currentApp = newApp;
+  });
 }

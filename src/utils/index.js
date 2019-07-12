@@ -1,8 +1,16 @@
-import { navigate } from "@reach/router";
+// todo #reachRouter - should we use this? If so, should we consolidate with react-router-dom?
+// import { navigate } from "@reach/router";
 import SimpleCrypto from 'simple-crypto-js';
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
 import bcrypt from 'bcryptjs';
+
+import {
+  USER_KEY,
+  COOKIE_MASTER_PASSWORD,
+  MASTER_PASS_SECRET,
+  CURRENT_USER_KEY,
+} from "../constants";
 
 let storage;
 
@@ -14,13 +22,6 @@ if (typeof window === 'undefined') {
   console.log('is window')
   storage = window.localStorage;
 }
-
-import {
-  USER_KEY,
-  COOKIE_MASTER_PASSWORD,
-  MASTER_PASS_SECRET,
-  CURRENT_USER_KEY,
-} from "../constants";
 
 export function saveMasterPassword(masterPassword) {
   const simpleCrypto = new SimpleCrypto(MASTER_PASS_SECRET);
@@ -135,7 +136,9 @@ export function clearStorage() {
 
 export function logout() {
   clearStorage();
-  navigate('/login');
+  // todo #reachRouter - should we use this? If so, should we consolidate with react-router-dom?
+  // navigate('/login');
+  alert('todo redirect to /login -- should we use reach router or react-dom?');
 }
 
 export function userLogged() {
@@ -213,7 +216,7 @@ export function buildURLParam(obj, prefix) {
       var k = prefix ? prefix + "[" + p + "]" : p,
         v = obj[p];
       str.push((v !== null && typeof v === "object") ?
-        serialize(v, k) :
+        window.serialize(v, k) :
         encodeURIComponent(k) + "=" + encodeURIComponent(v));
     }
   }

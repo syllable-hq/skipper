@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import { USER_ID } from '../constants';
 
 const config = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
+  apiKey: process.env.RAZZLE_API_KEY,
+  authDomain: process.env.RAZZLE_AUTH_DOMAIN,
+  databaseURL: process.env.RAZZLE_DATABASE_URL,
+  projectId: process.env.RAZZLE_PROJECT_ID,
+  storageBucket: process.env.RAZZLE_STORAGE_BUCKET,
+  messagingSenderId: process.env.RAZZLE_MESSAGING_SENDER_ID,
+  appId: process.env.RAZZLE_APP_IDD
 };
 
 class Firebase {
