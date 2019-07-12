@@ -1,9 +1,9 @@
-@import '../../shared-styles/variables.scss';
-@import '../../shared-styles/mixins.scss';
+@import "../../shared-styles/variables.scss";
+@import "../../shared-styles/mixins.scss";
 
 .nav-main {
   background-color: #fff;
-  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   z-index: 3;
@@ -70,7 +70,7 @@
   .menu {
     clear: both;
     max-height: 0;
-    transition: max-height .2s ease-out;
+    transition: max-height 0.2s ease-out;
     float: right;
   }
 
@@ -90,18 +90,18 @@
     display: block;
     height: 4px;
     position: relative;
-    transition: background .2s ease-out;
+    transition: background 0.2s ease-out;
     width: 35px;
   }
 
   .menu-icon .navicon:before,
   .menu-icon .navicon:after {
     background: #333;
-    content: '';
+    content: "";
     display: block;
     height: 100%;
     position: absolute;
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
     width: 100%;
   }
 
@@ -118,24 +118,24 @@
     display: none;
   }
 
-  .menu-btn:checked~.menu {
+  .menu-btn:checked ~ .menu {
     max-height: 50%;
   }
 
-  .menu-btn:checked~.menu-icon .navicon {
+  .menu-btn:checked ~ .menu-icon .navicon {
     background: transparent;
   }
 
-  .menu-btn:checked~.menu-icon .navicon:before {
+  .menu-btn:checked ~ .menu-icon .navicon:before {
     transform: rotate(-45deg);
   }
 
-  .menu-btn:checked~.menu-icon .navicon:after {
+  .menu-btn:checked ~ .menu-icon .navicon:after {
     transform: rotate(45deg);
   }
 
-  .menu-btn:checked~.menu-icon:not(.steps) .navicon:before,
-  .menu-btn:checked~.menu-icon:not(.steps) .navicon:after {
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     top: 0;
   }
 
@@ -161,7 +161,7 @@
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
-  ul {
+  ul.menu {
     height: 100vh;
     width: 100%;
 

@@ -10,12 +10,12 @@ import NavMain from '../NavMain';
 import useCredentialFetch from '../Dashboard/useStateCredentials';
 import { withFirebase } from '../../Firebase';
 import CredentialForm from '../Credential/form';
+import RemoveAlert from './removeAlert';
 
 import {
   getCredentialAt,
   logout,
   setCredentials,
-  getCredentials,
   removeCredential,
 } from '../../utils';
 
@@ -50,6 +50,7 @@ function Secrets(props) {
   const credentials = useCredentialFetch(props);
   const [display, setDisplay] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [credential, setCredential] = useState({});
   const [indexToUpdate, setIndexToUpdate] = useState(null);
 
@@ -76,12 +77,17 @@ function Secrets(props) {
   }
 
   // Delete secrets
-  function removeHandler(indexItem) {
+  function deleteHandler(indexItem) {
     const userInfo = removeCredential(indexItem);
     props.db.saveUserInfo(userInfo)
       .then(() => {
         window.location.href = '/dashboard';
       });
+  }
+
+  // Show remove secrets alert
+  function removeHandler() {
+    setShowRemoveModal(!showRemoveModal);
   }
 
   // Show edit secrets
@@ -93,15 +99,18 @@ function Secrets(props) {
   }
 
   // Hide edit secrets
-  function hideHandler() {
-    setShowEditModal(false);
+  function hideHandler(modal) {
+    if (modal == 'edit') {
+      return setShowEditModal(false);
+    }
+    setShowRemoveModal(false);
   }
 
   // Update secrets
   function updateHandler(data) {
     const updateCredential = Object.assign({}, credential, data);
     credentials.splice(indexToUpdate, 1, updateCredential);
-    hideHandler();
+    hideHandler('edit');
     const userInfo = setCredentials(credentials);
     props.db.saveUserInfo(userInfo)
       .then(() => {
@@ -141,7 +150,7 @@ function Secrets(props) {
               <RowItem valueCopiedHandler={valueCopiedHandler} label="Secret" value={secrets.password} />
             </Form.Group>
             <Form.Group className="actions">
-              <Button variant="danger" size="sm" onClick={() => removeHandler(id)}>Remove</Button>
+              <Button variant="danger" size="sm" onClick={removeHandler}>Remove</Button>
               <Button variant="dark" size="sm" onClick={() => editHandler(id)} >Edit</Button>
             </Form.Group>
           </div>
@@ -150,9 +159,14 @@ function Secrets(props) {
               <Button variant="secondary">Dashboard</Button>
             </a>
           </Form.Group>
-          <Modal show={showEditModal} onHide={hideHandler}>
+          <Modal show={showEditModal} onHide={() => hideHandler('edit')}>
             <Modal.Body>
               <CredentialForm {...credential} updateHandler={updateHandler} />
+            </Modal.Body>
+          </Modal>
+          <Modal show={showRemoveModal} onHide={() => hideHandler('remove')}>
+            <Modal.Body>
+              <RemoveAlert deleteHandler={deleteHandler} hideHandler={hideHandler} id={id} />
             </Modal.Body>
           </Modal>
         </div>
