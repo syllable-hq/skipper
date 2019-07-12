@@ -12,10 +12,10 @@ function NavMain() {
         <a href="/">
           <img className="logo" src={`/skipper_logo.png`} />
         </a>
-        <input className="menu-btn" type="checkbox" id="menu-btn" />
         <label className="app-title">
           Skipper
         </label>
+        <input className="menu-btn" type="checkbox" id="menu-btn" />
         <label className="menu-icon" htmlFor="menu-btn">
           <span className="navicon"></span>
         </label>
