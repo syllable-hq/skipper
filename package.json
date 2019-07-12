@@ -9,6 +9,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
     "bcryptjs": "2.4.3",
     "bootstrap": "4.3.1",

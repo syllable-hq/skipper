@@ -10,8 +10,8 @@ import SignupConfirmation from './Components/SignupConfirmation';
 import Signup from './Components/Signup';
 import About from './Components/About';
 import Comp404 from './Components/404';
+import './app.scss';
 
-import './App.scss';
 const firebase = new Firebase();
 const App = () => (
   <FirebaseContext.Provider value={firebase}>
@@ -23,6 +23,7 @@ const App = () => (
       <Route exact path='/signup_confirmation' component={SignupConfirmation} />
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/about' component={About} />
+      <Route exact path='/secrets/:id' component={Credential} />
       <Route component={Comp404} />
     </Switch>
   </FirebaseContext.Provider>
