@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { navigate } from "@reach/router";
 import NavMain from '../NavMain';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -85,7 +84,7 @@ function Signup(props) {
   }
 
   function loginAction(evt) {
-    navigate('/login');
+    window.location.href = '/login';
   }
 
   return (

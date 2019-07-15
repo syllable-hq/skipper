@@ -1,5 +1,4 @@
 // todo #reachRouter - should we use this? If so, should we consolidate with react-router-dom?
-import { navigate } from "@reach/router";
 import SimpleCrypto from 'simple-crypto-js';
 import phonetic from 'phonetic';
 import Cookies from 'universal-cookie';
@@ -137,7 +136,7 @@ export function clearStorage() {
 export function logout() {
   clearStorage();
   // todo #reachRouter - should we use this? If so, should we consolidate with react-router-dom?
-  navigate('/login');
+  window.location.href = '/login';
   // alert('todo redirect to /login -- should we use reach router or react-dom?');
 }
 
