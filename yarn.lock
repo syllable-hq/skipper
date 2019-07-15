@@ -4959,6 +4959,11 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
+is-heroku@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-heroku/-/is-heroku-1.0.1.tgz#46715fcd9d5ce55a9f254e6b9816735ebab38140"
+  integrity sha1-RnFfzZ1c5VqfJU5rmBZzXrqzgUA=
+
 is-number@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
@@ -6786,7 +6791,7 @@ object.assign@^4.1.0:
     has-symbols "^1.0.0"
     object-keys "^1.0.11"
 
-object.entries@^1.1.0:
+object.entries@^1.0.4, object.entries@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/object.entries/-/object.entries-1.1.0.tgz#2024fc6d6ba246aee38bdb0ffd5cfbcf371b7519"
   integrity sha512-l+H6EQ8qzGRxbkHOd5I/aHRhHDKoQXQ8g0BYt4uSweQU1/J6dZUOyWh9a2Vky35YCKjzmgxOzta2hH6kf9HuXA==
@@ -7882,6 +7887,14 @@ razzle-dev-utils@^2.4.1:
     react-dev-utils "^6.1.1"
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
+
+razzle-heroku@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/razzle-heroku/-/razzle-heroku-3.0.0.tgz#18a4e0f077685520bcca94f546b3ababf4d5e3d5"
+  integrity sha512-n61kuoKw9NlMNSwgIR/3PD3XQzWkpCQPrALOk9wcAEmHbMf7zbkc4mTBe//gRu2brCZbdgJ3d75JCQK6hZzlkA==
+  dependencies:
+    is-heroku "^1.0.1"
+    object.entries "^1.0.4"
 
 razzle-plugin-scss@^3.0.0:
   version "3.0.0"
