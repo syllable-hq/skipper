@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import Credential from './Components/Credential';
+import Secrets from './Components/Secrets';
 import Firebase, { FirebaseContext } from './Firebase';
 import SignupConfirmation from './Components/SignupConfirmation';
 import Signup from './Components/Signup';
@@ -23,7 +24,7 @@ const App = () => (
       <Route exact path='/signup_confirmation' component={SignupConfirmation} />
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/about' component={About} />
-      <Route exact path='/secrets/:id' component={Credential} />
+      <Route exact path='/secrets/:id' component={Secrets} />
       <Route component={Comp404} />
     </Switch>
   </FirebaseContext.Provider>

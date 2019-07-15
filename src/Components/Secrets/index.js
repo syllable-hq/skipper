@@ -55,8 +55,7 @@ function Secrets(props) {
   const [indexToUpdate, setIndexToUpdate] = useState(null);
 
   const [copiedFlag, setFlag] = useState(false);
-
-  const { id } = props;
+  const id = props.match.params.id;
   const secrets = getCredentialAt(id);
 
   validatePage(secrets);
