@@ -19,6 +19,8 @@
     "localstorage-polyfill": "^1.0.1",
     "phonetic": "0.1.1",
     "randomatic": "3.1.1",
+    "razzle": "^2.2.0",
+    "razzle-plugin-scss": "^3.0.0",
     "react": "^16.4.1",
     "react-bootstrap": "1.0.0-beta.8",
     "react-csv": "^1.1.1",
@@ -27,9 +29,5 @@
     "react-router-dom": "^4.3.1",
     "simple-crypto-js": "2.0.2",
     "universal-cookie": "4.0.0"
-  },
-  "devDependencies": {
-    "razzle": "^2.2.0",
-    "razzle-plugin-scss": "^3.0.0"
   }
 }
