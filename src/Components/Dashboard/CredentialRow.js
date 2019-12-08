@@ -10,7 +10,11 @@ function CredentialRow({ indexItem, website, primaryUser, secundaryUser, passwor
           <li>URL: {website}</li>
           <li>username: {primaryUser}</li>
           <li>username2: {secundaryUser}</li>
-          <li>password: {password}</li>
+          {/*
+            todo: Don't show the password. But add a copy button here like on the credential page?
+            <li>password: {password}</li>
+          */}
+          <li>password: ***********</li>
         </ul>
       </td>
     </tr>

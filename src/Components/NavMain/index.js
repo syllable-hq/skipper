@@ -22,7 +22,9 @@ function NavMain() {
         <ul className="menu">
           <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="/about">About Skipper</a></li>
-          <li><a href="/contact">Contact Skipper</a></li>
+          {/*
+            <li><a href="/contact">Contact Skipper</a></li>
+          */}
           <li>
             <a href={userIsLogged ? '/login' : '/signup'}>
               {userIsLogged ? 'Logout' : 'Signup'}
