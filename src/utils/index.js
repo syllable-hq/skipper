@@ -63,6 +63,7 @@ export function getUserName() {
 }
 
 export function getCredentialAt(index) {
+
   const userInfo = getUserInfo();
   if (!userInfo) return;
   const credential = userInfo.credentials[index];

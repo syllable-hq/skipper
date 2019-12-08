@@ -70,7 +70,7 @@ function Dashboard(props) {
           <h1>DASHBOARD</h1>
 
           <Form.Group>
-            <Form.Control onChange={searchHandler} type="text" placeholder="Search yout secrets" />
+            <Form.Control onChange={searchHandler} type="text" placeholder="Search your secrets" />
           </Form.Group>
 
           <div className="btn-add-container">
@@ -88,7 +88,7 @@ function Dashboard(props) {
           </Table>
 
           <CSVReader
-            label="Upload your passwords from a csv"
+            label="Upload your passwords from a csv &nbsp;"
             onFileLoaded={handleForce}
             inputId="password-reader"
           />

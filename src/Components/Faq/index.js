@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import NavMain from '../NavMain';
 import './index.scss';
 
@@ -8,6 +8,7 @@ function Faq() {
       <NavMain />
       <div className="page-inner">
         <div className="page-panel">
+          <h1>FAQ</h1>
           <div>
             <section>
               <a href='/#'>What is Skipper?</a><br></br>
