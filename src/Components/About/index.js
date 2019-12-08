@@ -14,7 +14,7 @@ function About() {
               <h3 className="h3">
                 Who made Skipper?
               </h3>
-              <p>Skipper is an open source project sponsored by <a href="https://www.syllablehq.com/">Syllable</a>. <br/>
+              <p>Skipper is an open source project sponsored by <a href="https://www.syllablehq.com/" target="_blank" rel="noopener noreferrer">Syllable</a>. <br/>
 
               </p>
               <h3 className="h3">
