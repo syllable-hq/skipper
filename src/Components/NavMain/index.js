@@ -27,7 +27,7 @@ function NavMain() {
           */}
           <li>
             <a href={userIsLogged ? '/login' : '/signup'}>
-              {userIsLogged ? 'Logout' : 'Signup'}
+              {userIsLogged ? 'Log Out' : 'Sign Up'}
             </a>
           </li>
           <li><a href="/faq">FAQ</a></li>

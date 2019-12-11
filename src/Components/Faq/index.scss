@@ -2,8 +2,14 @@
 @import '../../shared-styles/mixins.scss';
 
 .page-about {
-    .page-panel {
-        position: relative;
-        font-size: $font-size-md;
+  .page-panel {
+    position: relative;
+    font-size: $font-size-md;
+  }
+
+  .faq-list {
+    li {
+      margin-bottom: 2rem;
     }
+  }
 }

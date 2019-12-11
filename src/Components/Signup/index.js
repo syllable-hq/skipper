@@ -91,7 +91,7 @@ function Signup(props) {
     <div className="page page-home">
       <NavMain activePage='home' />
       <div className="page-inner">
-        <div className="page-panel">
+        <div className="page-panel form-centered">
           <h1>SIGN UP</h1>
           {message && <Alert variant='danger'> {message} </Alert>}
           {copiedFlag && <Alert className="alert-copied" variant="info">
@@ -112,7 +112,11 @@ function Signup(props) {
           <Form.Group>
             <Form.Label>Choose your Master Password</Form.Label>
             <Form.Control type="password" value={typedPassword} onChange={typedPasswordHandler} placeholder="xxxxxxxxxxxx" />
-            <a className="info">Why 12 characters?</a>
+            {/*
+              todo: #quick-fix-for-forms add back after functionality works
+              <a className="info">Why 12 characters?</a>
+            */}
+              <span className="info">Must be at least 12 characters</span>
           </Form.Group>
           <div className="next">
             <Button onClick={nextHandler} className="next-button" variant="secondary">

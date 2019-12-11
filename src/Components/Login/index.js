@@ -55,14 +55,14 @@ function Login(props) {
     <div className="page page-login">
       <NavMain />
       <div className="page-inner">
-        <div className="page-panel">
+        <div className="page-panel form-centered">
           <h1>LOGIN</h1>
           <Form>
             <Form.Group className="form-group">
               <Form.Label>Master Password</Form.Label>
               <Form.Control ref={inputPasswordEl} type="password" />
               {message && <Alert variant='danger'> {message} </Alert>}
-              <div>
+              <div className="">
                 <a href="/">Forgot Master Password?</a>
                 <Button type="submit" onClick={loginAction} className="login-button" variant="secondary">Log In</Button>
               </div>

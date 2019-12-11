@@ -94,6 +94,8 @@ h1 {
 .page-panel {
   @include full-size();
   background: $color-secondary;
+  margin: 0 auto;
+  max-width: 40rem;
 
   .h2 {
     font-weight: $font-weight-bold;
@@ -102,6 +104,12 @@ h1 {
 
   section {
     margin: $padding-for-section;
+  }
+
+
+  // #quick-fix-for-forms
+  &.form-centered {
+    max-width: 30rem;
   }
 }
 

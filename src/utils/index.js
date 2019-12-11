@@ -63,13 +63,17 @@ export function getUserName() {
 }
 
 export function getCredentialAt(index) {
-
   const userInfo = getUserInfo();
   if (!userInfo) return;
   const credential = userInfo.credentials[index];
   const masterPass = getMasterPassword();
   var simpleCrypto = new SimpleCrypto(masterPass);
   const decryptedCredential = simpleCrypto.decrypt(credential);
+
+  if (!decryptedCredential) {
+    return;
+  }
+
   return JSON.parse(decryptedCredential);
 }
 
@@ -77,10 +81,16 @@ export function getCredentials(credentials) {
   const cookies = new Cookies();
   const masterPass = getMasterPassword();
   var simpleCrypto = new SimpleCrypto(masterPass);
+
   return credentials.map(cred => {
     const decryptedCredential = simpleCrypto.decrypt(cred);
+
+    if (!decryptedCredential) {
+      return null;
+    }
+
     return JSON.parse(decryptedCredential);
-  });
+  }).filter(Boolean);
 }
 
 export function addCredentialInfo(credentials) {
