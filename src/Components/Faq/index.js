@@ -11,17 +11,41 @@ function Faq() {
           <h1>FAQ</h1>
           <div>
             <section>
-              <a href='/#'>What is Skipper?</a><br></br>
-              <a href='/#'>Why did we make Skipper?</a><br></br>
-              <a href='/#'>How did we make Skipper?</a><br></br>
-              <a href='/#'>Who is maintaining Skipper?</a><br></br>
-              <a href='/#'>Can I use Skipper on my computer?</a><br></br>
-              <a href='/#'>Can I use Skipper on my phone?</a><br></br>
-              <a href='/#'>Is Skipper an iOS App?</a><br></br>
-              <a href='/#'>Is Skipper web-based?</a><br></br>
-              <a href='/#'>Does Skipper have a plugin for web browsers</a><br></br>
-              <a href='/#'>How does Skipper protect my credentials from unsavory pirates?</a><br></br>
-              <a href='/#'>What is federated/decentralised and end-to-end encryption and how does it apply to Skipper?</a><br></br>
+              <ul className="faq-list">
+                <li>
+                  <a href='#'>What is Skipper?</a>
+                </li>
+                <li>
+                  <a href='#'>Why did we make Skipper?</a>
+                </li>
+                <li>
+                  <a href='#'>How did we make Skipper?</a>
+                </li>
+                <li>
+                  <a href='#'>Who is maintaining Skipper?</a>
+                </li>
+                <li>
+                  <a href='#'>Can I use Skipper on my computer?</a>
+                </li>
+                <li>
+                  <a href='#'>Can I use Skipper on my phone?</a>
+                </li>
+                <li>
+                  <a href='#'>Is Skipper an iOS App?</a>
+                </li>
+                <li>
+                  <a href='#'>Is Skipper web-based?</a>
+                </li>
+                <li>
+                  <a href='#'>Does Skipper have a plugin for web browsers</a>
+                </li>
+                <li>
+                  <a href='#'>How does Skipper protect my credentials from unsavory pirates?</a>
+                </li>
+                <li>
+                  <a href='#'>What is federated/decentralised and end-to-end encryption and how does it apply to Skipper?</a>
+                </li>
+              </ul>
             </section>
           </div>
         </div>
