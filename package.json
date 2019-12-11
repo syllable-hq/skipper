@@ -1,6 +1,12 @@
 {
-  "name": "razzle-examples-with-scss",
-  "version": "2.2.0",
+  "name": "Skipper",
+  "version": "0.0.1",
+  "description": "A dead-simple password manager",
+  "author": "Syllable",
+  "homepage": "https://github.com/syllable-hq/skipper",
+  "bugs": {
+    "url": "https://github.com/syllable-hq/skipper/issues"
+  },
   "license": "MIT",
   "scripts": {
     "start": "razzle start",

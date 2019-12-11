@@ -9,7 +9,7 @@ const config = {
   projectId: process.env.RAZZLE_PROJECT_ID,
   storageBucket: process.env.RAZZLE_STORAGE_BUCKET,
   messagingSenderId: process.env.RAZZLE_MESSAGING_SENDER_ID,
-  appId: process.env.RAZZLE_APP_IDD
+  appId: process.env.RAZZLE_APP_ID
 };
 
 class Firebase {
