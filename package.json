@@ -18,7 +18,7 @@
     "bcryptjs": "2.4.3",
     "bootstrap": "4.4.1",
     "clipboard-copy": "3.1.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "firebase": "6.1.0",
     "localstorage-polyfill": "^1.0.1",
     "phonetic": "0.1.1",
